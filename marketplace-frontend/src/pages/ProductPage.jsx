@@ -171,6 +171,25 @@ function ProductPage() {
               >
                 Add to Cart
               </Button>
+              <Button
+                variant="outlined"
+                sx={{ ml: 5, mt: 7, mb: 5 }}
+                onClick={() => {
+                  onClickAddCart(productId);
+                  navigate("/my-chats", {
+                    state: {
+                      createNewConversation: true,
+                      sellerId: 2,
+                      sellerName: "Joao",
+                      productId: productId,
+                      productName: product.name,
+                      productImage: product.image,
+                    },
+                  });
+                }}
+              >
+                Talk with the Seller
+              </Button>
             </Box>
           </Grid>
         </Grid>

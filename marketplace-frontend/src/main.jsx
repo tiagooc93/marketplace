@@ -15,6 +15,7 @@ import AddProductLayout from "./pages/add_product/AddProductLayout.jsx";
 
 import Checkout from "./pages/Checkout.jsx";
 import Login from "./pages/LoginPage.jsx";
+import Chat from "./pages/Chat.jsx";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: "/checkout",
     element: <Checkout />,
+  },
+  {
+    path: "/my-chats",
+    element: <Chat />,
   },
 ]);
 

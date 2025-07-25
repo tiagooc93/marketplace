@@ -136,7 +136,11 @@ export default function PrimarySearchAppBar() {
             </Button>
             <Button
               onClick={() => {
-                navigate("/login");
+                navigate("/my-chats", {
+                  state: {
+                    createNewConversation: false,
+                  },
+                });
               }}
               sx={{
                 color: "black",
