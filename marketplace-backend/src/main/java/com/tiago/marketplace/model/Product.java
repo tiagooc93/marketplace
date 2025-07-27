@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name", "seller_id"}))
 public class Product {
 
     @Id
@@ -21,6 +22,8 @@ public class Product {
     private String name;
 
     private double price;
+
+    private String category;
 
     private String description;
     
@@ -36,6 +39,7 @@ public class Product {
     @JsonIgnore
     private ShoppingCart shoppingCart;
 
+    @Column(name="seller_id")
     private Long sellerId;
 
     private Float rating =4.0F;
@@ -47,12 +51,14 @@ public class Product {
         this.image=image;
     }
 
-    public Product(String name, double price, String description, String brand, String image){
+    public Product(String name, double price, String category, String description, String brand, String image, Long sellerId){
         this.name=name;
         this.price=price;
+        this.category=category;
         this.description=description;
         this.brand = brand;
         this.image=image;
+        this.sellerId = sellerId;
     }
 
     public Product(String name, double price, String description, String longDescription, String brand, String image){

@@ -69,7 +69,7 @@ export default function PrimarySearchAppBar() {
   const handleSearchKeyDown = (event) => {
     if (event.key === "Enter") {
       console.log("User pressed Enter with search:", searchString);
-      navigate("/search", { state: { searchString: searchString } });
+      navigate(`/search?query=${encodeURIComponent(searchString)}`);
     }
   };
 

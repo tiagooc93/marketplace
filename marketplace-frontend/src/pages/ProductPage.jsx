@@ -150,7 +150,7 @@ function ProductPage() {
                 variant="h4"
                 sx={{ mt: 3 }}
               >
-                R$ {product.price},00
+                R$ {product.price}
               </Typography>
               <Typography sx={{ mt: 5 }}>{product.description}</Typography>
 

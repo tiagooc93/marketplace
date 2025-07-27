@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import ProductCard from "../components/ProductCard";
 import GroupsBar from "../components/GroupsBar";
+import { useSearchParams } from "react-router-dom";
 
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -30,8 +31,17 @@ function SearchResultPage() {
 
   const [selectedBrands, setSelectedBrands] = useState(new Set());
 
-  const location = useLocation();
-  const searchString = location.state.searchString;
+  const categories = new Set([
+    "book",
+    "electronic",
+    "music",
+    "kitchen",
+    "top Sellers",
+    "room",
+  ]);
+
+  const [searchParams] = useSearchParams();
+  const searchString = searchParams.get("query") || "";
   console.log("On Search Result Page, search value = " + searchString);
 
   useEffect(() => {
@@ -49,6 +59,7 @@ function SearchResultPage() {
           retrievedProducts.push({
             name: data[i]["name"],
             description: data[i]["description"],
+            category: data[i]["category"],
             price: data[i]["price"],
             image: data[i]["image"],
             brand: data[i]["brand"],
@@ -59,11 +70,26 @@ function SearchResultPage() {
         console.log("Data to be render:");
         console.log(retrievedProducts);
 
-        const filteredData = retrievedProducts.filter(
-          (item) =>
-            item.name.toLowerCase().includes(searchString.toLowerCase()) ||
-            item.description.toLowerCase().includes(searchString.toLowerCase())
-        );
+        const filteredData = retrievedProducts.filter((item) => {
+          console.log("COMPARANDO: ", searchString.toLowerCase());
+          console.log(
+            "TEM NO SET: ",
+            categories.has(searchString.toLowerCase())
+          );
+          console.log("SET: ", categories);
+          if (categories.has(searchString.toLowerCase())) {
+            return item.category
+              .toLowerCase()
+              .includes(searchString.toLowerCase());
+          } else {
+            return (
+              item.name.toLowerCase().includes(searchString.toLowerCase()) ||
+              item.description
+                .toLowerCase()
+                .includes(searchString.toLowerCase())
+            );
+          }
+        });
 
         setAllProducts(filteredData);
         setFilteredProducts(filteredData);
@@ -73,7 +99,7 @@ function SearchResultPage() {
     };
 
     fetchAllProducts();
-  }, []);
+  }, [searchString]);
 
   function FilterBySideFilters() {
     console.log("Filter By Price: ", filterByPrice);

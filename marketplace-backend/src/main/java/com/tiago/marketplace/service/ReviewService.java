@@ -19,6 +19,9 @@ public class ReviewService {
     ProductService productService;
 
     public void saveReview(Review review){
+        if (reviewRepository.existsByProductIdAndUsername(review.getProductId(), review.getUsername())) {
+            throw new IllegalArgumentException("User of this username already inserted a review.");
+        }
         reviewRepository.save(review);
         productService.updateRating(review.getProductId());
     }
