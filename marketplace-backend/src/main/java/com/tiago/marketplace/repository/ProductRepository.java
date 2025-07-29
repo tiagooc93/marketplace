@@ -11,4 +11,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByShoppingCart(ShoppingCart cart);
 
+    boolean existsByNameAndSellerId(String name, Long sellerId);
+
 }

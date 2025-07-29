@@ -42,22 +42,32 @@ export default function Catalog({ title }) {
 
   return (
     <>
-      <Typography variant="h5" sx={{ fontWeight: "bold", ml: 5, mt: 10 }}>
-        {title}
-      </Typography>
-      <Grid container spacing={3} sx={{ ml: 5, mt: 5 }}>
-        {allProducts.map((item, index) => (
-          <Box key={index} sx={{ maxWidth: 400 }}>
-            <ProductCard
-              name={item.name}
-              price={item.price}
-              description={item.description}
-              image={item.image}
-              productId={item.productId}
-            />
-          </Box>
-        ))}
-      </Grid>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          width: "75%",
+          mx: "auto",
+        }}
+      >
+        <Typography variant="h5" sx={{ fontWeight: "bold", mt: 10 }}>
+          {title}
+        </Typography>
+        <Grid container spacing={3} sx={{ mt: 5, justifyContent: "center" }}>
+          {allProducts.map((item, index) => (
+            <Box key={index} sx={{ maxWidth: 400 }}>
+              <ProductCard
+                name={item.name}
+                price={item.price}
+                description={item.description}
+                image={item.image}
+                productId={item.productId}
+              />
+            </Box>
+          ))}
+        </Grid>
+      </Box>
     </>
   );
 }

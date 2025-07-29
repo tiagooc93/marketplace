@@ -26,8 +26,8 @@ export default function ProductCardAtCart({
   console.log("product: ", name, ": ", description);
 
   return (
-    <Card sx={{ height: 250, width: 1000 }}>
-      <Grid container spacing={15} sx={{ width: 1000 }}>
+    <Card sx={{ height: 250, width: "100%" }}>
+      <Grid container spacing={17} sx={{ width: "100%" }}>
         <Grid>
           <Box sx={{ p: 2, m: 1, maxWidth: 300 }}>
             <CardMedia
@@ -41,7 +41,7 @@ export default function ProductCardAtCart({
         </Grid>
         <Grid>
           <Typography gutterBottom variant="h5" component="div" sx={{ mt: 3 }}>
-            Preço:
+            Price:
           </Typography>
           <Typography
             gutterBottom
@@ -62,6 +62,7 @@ export default function ProductCardAtCart({
         </Grid>
         <Grid>
           <IconButton
+            size="large"
             onClick={() => onDelete(productId)}
             aria-label="delete"
             sx={{ mt: 7 }}

@@ -4,10 +4,10 @@ import Button from "@mui/material/Button";
 import PrimarySearchAppBar from "../components/AppBar";
 import Box from "@mui/material/Box";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import ProductCard from "../components/ProductCard";
 import GroupsBar from "../components/GroupsBar";
+import { useSearchParams } from "react-router-dom";
 
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -30,8 +30,17 @@ function SearchResultPage() {
 
   const [selectedBrands, setSelectedBrands] = useState(new Set());
 
-  const location = useLocation();
-  const searchString = location.state.searchString;
+  const categories = new Set([
+    "book",
+    "electronic",
+    "music",
+    "kitchen",
+    "top Sellers",
+    "room",
+  ]);
+
+  const [searchParams] = useSearchParams();
+  const searchString = searchParams.get("query") || "";
   console.log("On Search Result Page, search value = " + searchString);
 
   useEffect(() => {
@@ -49,6 +58,7 @@ function SearchResultPage() {
           retrievedProducts.push({
             name: data[i]["name"],
             description: data[i]["description"],
+            category: data[i]["category"],
             price: data[i]["price"],
             image: data[i]["image"],
             brand: data[i]["brand"],
@@ -59,11 +69,26 @@ function SearchResultPage() {
         console.log("Data to be render:");
         console.log(retrievedProducts);
 
-        const filteredData = retrievedProducts.filter(
-          (item) =>
-            item.name.toLowerCase().includes(searchString.toLowerCase()) ||
-            item.description.toLowerCase().includes(searchString.toLowerCase())
-        );
+        const filteredData = retrievedProducts.filter((item) => {
+          console.log("COMPARANDO: ", searchString.toLowerCase());
+          console.log(
+            "TEM NO SET: ",
+            categories.has(searchString.toLowerCase())
+          );
+          console.log("SET: ", categories);
+          if (categories.has(searchString.toLowerCase())) {
+            return item.category
+              .toLowerCase()
+              .includes(searchString.toLowerCase());
+          } else {
+            return (
+              item.name.toLowerCase().includes(searchString.toLowerCase()) ||
+              item.description
+                .toLowerCase()
+                .includes(searchString.toLowerCase())
+            );
+          }
+        });
 
         setAllProducts(filteredData);
         setFilteredProducts(filteredData);
@@ -73,7 +98,7 @@ function SearchResultPage() {
     };
 
     fetchAllProducts();
-  }, []);
+  }, [searchString]);
 
   function FilterBySideFilters() {
     console.log("Filter By Price: ", filterByPrice);
@@ -110,8 +135,15 @@ function SearchResultPage() {
         <PrimarySearchAppBar />
         <GroupsBar />
       </Box>
-      <Grid container spacing={0} sx={{ ml: 5 }}>
-        <Grid>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "flex-start",
+          mx: "auto",
+          width: "95%",
+        }}
+      >
+        <Box sx={{}}>
           <Card
             sx={{
               mt: 5,
@@ -193,8 +225,6 @@ function SearchResultPage() {
                   label={product.brand}
                 />
               ))}
-
-              <FormControlLabel control={<Checkbox />} label="Gibson" />
             </FormGroup>
             <Typography
               fontWeight="bold"
@@ -277,23 +307,28 @@ function SearchResultPage() {
               </Button>
             </Box>
           </Card>
-        </Grid>
-        <Grid>
-          <Grid container spacing={0} sx={{ m: 10 }}>
-            {filteredProducts.map((item, index) => (
-              <Box key={index} sx={{ p: 2, m: 1, maxWidth: 400 }}>
-                <ProductCard
-                  name={item.name}
-                  price={item.price}
-                  description={item.description}
-                  image={item.image}
-                  productId={item.productId}
-                />
-              </Box>
-            ))}
+        </Box>
+        <Box sx={{ mt: 10, ml: 5 }}>
+          <Typography variant="h5" sx={{}}>
+            Resultados para a pesquisa:
+          </Typography>
+          <Grid>
+            <Grid container spacing={3} sx={{ mt: 5 }}>
+              {filteredProducts.map((item, index) => (
+                <Box key={index} sx={{ maxWidth: 400 }}>
+                  <ProductCard
+                    name={item.name}
+                    price={item.price}
+                    description={item.description}
+                    image={item.image}
+                    productId={item.productId}
+                  />
+                </Box>
+              ))}
+            </Grid>
           </Grid>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </>
   );
 }

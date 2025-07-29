@@ -5,17 +5,13 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
-const pages = [
-  "Books",
-  "Eletronics",
-  "Music",
-  "Kitchen",
-  "Top Sellers",
-  "Room",
-];
+const pages = ["Book", "Electronic", "Music", "Kitchen", "Top Sellers", "Room"];
 
 function GroupsBar() {
+  const navigate = useNavigate();
+
   return (
     <AppBar
       position="static"
@@ -46,6 +42,13 @@ function GroupsBar() {
                     backgroundColor: "primary.dark",
                   },
                 }}
+                onClick={
+                  () => navigate(`/search?query=${encodeURIComponent(page)}`)
+                  /*navigate("/search", {
+                    state: { searchString: page },
+                    replace: true,
+                  }) */
+                }
               >
                 <Typography sx={{ fontSize: 15 }}>{page}</Typography>
               </Button>

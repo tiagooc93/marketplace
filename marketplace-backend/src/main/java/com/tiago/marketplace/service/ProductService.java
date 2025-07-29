@@ -22,6 +22,9 @@ public class ProductService {
     ReviewService reviewService;
 
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
+        if (productRepository.existsByNameAndSellerId(product.getName(), product.getSellerId())) {
+            throw new IllegalArgumentException("Product with this name and seller already exists.");
+        }
         return ResponseEntity.ok(productRepository.save(product));
 
     }

@@ -1,0 +1,363 @@
+[
+  {
+    "ID": 1,
+    "Product": "Wireless Bluetooth Headphones",
+    "Description": "Noise-cancelling over-ear headphones with 30 hours battery life.",
+    "Brand": "SonicWave",
+    "Price": 99.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 2,
+    "Product": "Smartphone 128GB",
+    "Description": "5G-enabled smartphone with 128GB storage and AMOLED display.",
+    "Brand": "NovaTech",
+    "Price": 599.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 3,
+    "Product": "Portable Bluetooth Speaker",
+    "Description": "Waterproof speaker with 12 hours playtime and deep bass.",
+    "Brand": "EchoBeat",
+    "Price": 49.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 4,
+    "Product": "4K Action Camera",
+    "Description": "Ultra HD waterproof action camera with Wi-Fi and accessories.",
+    "Brand": "Adventura",
+    "Price": 129.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 5,
+    "Product": "Smartwatch",
+    "Description": "Fitness tracker smartwatch with heart rate monitor and GPS.",
+    "Brand": "FitPulse",
+    "Price": 79.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 6,
+    "Product": "Laptop 15.6-inch",
+    "Description": "Lightweight laptop with 8GB RAM and 512GB SSD.",
+    "Brand": "ZenithOne",
+    "Price": 799.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 7,
+    "Product": "Wireless Mouse",
+    "Description": "Ergonomic wireless mouse with adjustable DPI settings.",
+    "Brand": "GlideTech",
+    "Price": 19.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 8,
+    "Product": "Mechanical Keyboard",
+    "Description": "RGB backlit mechanical keyboard with blue switches.",
+    "Brand": "KeyForge",
+    "Price": 69.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 9,
+    "Product": "External Hard Drive 1TB",
+    "Description": "Portable 1TB external hard drive USB 3.0.",
+    "Brand": "DataCore",
+    "Price": 54.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 10,
+    "Product": "1080p Webcam",
+    "Description": "Full HD webcam with built-in microphone for video calls.",
+    "Brand": "ClearView",
+    "Price": 39.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 11,
+    "Product": "USB-C Hub",
+    "Description": "7-in-1 USB-C hub with HDMI, USB 3.0, and SD card reader.",
+    "Brand": "LinkPro",
+    "Price": 34.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 12,
+    "Product": "Noise-Cancelling Earbuds",
+    "Description": "True wireless earbuds with ANC and wireless charging case.",
+    "Brand": "ZenAudio",
+    "Price": 89.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 13,
+    "Product": "Gaming Monitor 27-inch",
+    "Description": "27-inch 144Hz gaming monitor with 1ms response time and FreeSync.",
+    "Brand": "PixelRush",
+    "Price": 249.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 14,
+    "Product": "Smart Home Security Camera",
+    "Description": "Indoor/outdoor Wi-Fi security camera with night vision and motion alerts.",
+    "Brand": "SafeNest",
+    "Price": 59.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 15,
+    "Product": "Wireless Charging Pad",
+    "Description": "Fast wireless charging pad compatible with Qi-enabled devices.",
+    "Brand": "VoltEdge",
+    "Price": 24.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 16,
+    "Product": "Bluetooth Tracker Tag",
+    "Description": "Compact Bluetooth tracker for keys, bags, or pets with app integration.",
+    "Brand": "TrackMate",
+    "Price": 14.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 17,
+    "Product": "Streaming Microphone",
+    "Description": "USB condenser microphone for streaming, podcasting, and voice-over work.",
+    "Brand": "StreamCast",
+    "Price": 79.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 18,
+    "Product": "Portable SSD 500GB",
+    "Description": "High-speed portable SSD with 500GB capacity and USB-C connection.",
+    "Brand": "FlashXpress",
+    "Price": 99.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 19,
+    "Product": "Smart Light Bulb (4-Pack)",
+    "Description": "Wi-Fi enabled color-changing LED bulbs with app and voice control.",
+    "Brand": "GlowSmart",
+    "Price": 39.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 20,
+    "Product": "Video Doorbell",
+    "Description": "Wireless video doorbell with HD video, two-way audio, and motion detection.",
+    "Brand": "DoorGuardian",
+    "Price": 89.99,
+    "Category": "electronic",
+    "SellerID": 1
+  },
+  {
+    "ID": 21,
+    "Product": "Stainless Steel Chef's Knife",
+    "Description": "8-inch high-carbon stainless steel chef's knife with ergonomic handle.",
+    "Brand": "BladeMaster",
+    "Price": 29.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 22,
+    "Product": "Non-Stick Frying Pan 12\"",
+    "Description": "12-inch aluminum frying pan with non-stick coating and heat-resistant handle.",
+    "Brand": "CookEase",
+    "Price": 34.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 23,
+    "Product": "Blender with Glass Jar",
+    "Description": "700W countertop blender with 1.5L glass jar and 5-speed settings.",
+    "Brand": "MixPro",
+    "Price": 59.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 24,
+    "Product": "Electric Kettle 1.7L",
+    "Description": "1.7-liter electric kettle with auto shut-off and stainless steel body.",
+    "Brand": "BoilMax",
+    "Price": 39.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 25,
+    "Product": "Toaster 2-Slice",
+    "Description": "Compact 2-slice toaster with browning control and crumb tray.",
+    "Brand": "QuickToast",
+    "Price": 24.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 26,
+    "Product": "Air Fryer 4Qt",
+    "Description": "4-quart digital air fryer with touchscreen and 8 preset functions.",
+    "Brand": "CrispMate",
+    "Price": 89.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 27,
+    "Product": "Food Processor",
+    "Description": "12-cup food processor with slicing, chopping, and shredding attachments.",
+    "Brand": "PrepSmart",
+    "Price": 99.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 28,
+    "Product": "Slow Cooker 6Qt",
+    "Description": "6-quart programmable slow cooker with removable stoneware insert.",
+    "Brand": "TenderTime",
+    "Price": 49.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 29,
+    "Product": "Coffee Maker 12-Cup",
+    "Description": "12-cup drip coffee maker with glass carafe and programmable timer.",
+    "Brand": "BrewPro",
+    "Price": 44.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 30,
+    "Product": "Stand Mixer 5Qt",
+    "Description": "5-quart tilt-head stand mixer with 10 speeds and stainless steel bowl.",
+    "Brand": "MixMaster",
+    "Price": 149.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 31,
+    "Product": "Microwave Oven 1000W",
+    "Description": "1000W countertop microwave with digital display and 10 power levels.",
+    "Brand": "HeatWave",
+    "Price": 119.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 32,
+    "Product": "Cutlery Set 15-Piece",
+    "Description": "15-piece stainless steel cutlery set with wooden block.",
+    "Brand": "EdgeCraft",
+    "Price": 69.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 33,
+    "Product": "Measuring Cups & Spoons",
+    "Description": "10-piece measuring cups and spoons set with engraved measurements.",
+    "Brand": "PrepEase",
+    "Price": 14.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 34,
+    "Product": "Dish Drying Rack",
+    "Description": "2-tier dish drying rack with utensil holder and draining tray.",
+    "Brand": "DryNest",
+    "Price": 34.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 35,
+    "Product": "Spice Rack Organizer",
+    "Description": "Revolving spice rack with 16 glass jars (spices not included).",
+    "Brand": "FlavorStack",
+    "Price": 29.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 36,
+    "Product": "Non-Stick Baking Set",
+    "Description": "6-piece non-stick bakeware set including pans and trays.",
+    "Brand": "OvenReady",
+    "Price": 49.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 37,
+    "Product": "Knife Sharpener",
+    "Description": "2-stage manual knife sharpener with non-slip base.",
+    "Brand": "SharpEdge",
+    "Price": 19.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 38,
+    "Product": "Garlic Press",
+    "Description": "Heavy-duty stainless steel garlic press with ergonomic grip.",
+    "Brand": "CrushPro",
+    "Price": 12.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 39,
+    "Product": "Immersion Blender",
+    "Description": "Handheld immersion blender with variable speed control and whisk attachment.",
+    "Brand": "SmoothBlend",
+    "Price": 39.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  },
+  {
+    "ID": 40,
+    "Product": "Digital Kitchen Scale",
+    "Description": "Digital food scale with tare function and LCD display (max 11lb).",
+    "Brand": "WeighWise",
+    "Price": 18.99,
+    "Category": "kitchen",
+    "SellerID": 1
+  }
+]
+
