@@ -54,7 +54,7 @@ public class MarketplaceApplication implements CommandLineRunner {
 
 		ObjectMapper mapper = new ObjectMapper();
 		// Absolute or relative path to the file
-		File jsonFile = Paths.get("products_dataset.json").toFile();
+		File jsonFile = Paths.get("products_datasetv2.json").toFile();
 
 
 		List<Map<String, Object>> products = mapper.readValue(jsonFile, new TypeReference<>() {});
@@ -66,9 +66,11 @@ public class MarketplaceApplication implements CommandLineRunner {
 								Double.parseDouble(raw.get("Price").toString()),
 								(String) raw.get("Category"),
 								(String) raw.get("Description"),
+								(String) raw.get("LongDescription"),
 								(String) raw.get("Brand"),
 								"/uploads/images/product" + raw.get("ID") + ".png",
-								((Number) raw.get("SellerID")).longValue()
+								((Number) raw.get("SellerID")).longValue(),
+								(String) raw.get("SellerUsername")
 						)
 				);
 			} catch (IllegalArgumentException e) {

@@ -91,66 +91,113 @@ function ShoppingCartPage() {
 
   return (
     <>
-      <div className="card">
+      <Box>
         <PrimarySearchAppBar />
         <GroupsBar />
-        <Box sx={{ ml: 85, mt: 10 }}>
-          <Typography gutterBottom variant="h3">
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
+          <Typography gutterBottom variant="h4" sx={{ fontWeight: "bold" }}>
             Shopping Cart
           </Typography>
         </Box>
-      </div>
-      <Grid container spacing={70}>
-        <Grid>
-          <Stack spacing={4}>
-            {allProducts.map((item, index) => (
-              <Box key={index} sx={{ p: 2, m: 1, width: 600, maxWidth: 600 }}>
-                <ProductCardAtCart
-                  key={item.productId}
-                  name={item.name}
-                  price={item.price}
-                  description={item.description}
-                  image={item.image}
-                  productId={item.productId}
-                  onDelete={removeFromShoppingCart}
-                />
-              </Box>
-            ))}
-          </Stack>
-        </Grid>
-        <Grid>
-          <Card sx={{ width: 500, height: 500 }}>
-            <CardContent>
-              <Typography sx={{ ml: 20 }} variant="h3" component="div">
-                Summary
-              </Typography>
-              <Typography sx={{ mt: 10, whiteSpace: "pre" }} variant="h5">
-                {"Subtotal:                              R$" +
-                  totalPrice(allProducts)}
-              </Typography>
-              <Typography sx={{ mt: 5, whiteSpace: "pre" }} variant="h5">
-                {"Discounts:                           R$ -100,00"}
-              </Typography>
-              <Typography sx={{ mt: 5, whiteSpace: "pre" }} variant="h5">
-                {"Total:                                   R$ " +
-                  totalPrice(allProducts)}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button
-                sx={{ mt: 8, ml: 25 }}
-                variant="contained"
-                size="large"
-                onClick={() => {
-                  navigate("/checkout");
+      </Box>
+      <Box
+        sx={{
+          width: "100%",
+          height: "60vh",
+          display: "flex",
+          flexDirection: "row",
+          gap: 5,
+          mt: 5,
+          justifyContent: "center",
+        }}
+      >
+        <Box sx={{ display: "flex", width: "50%" }}>
+          <Stack spacing={5} sx={{}}>
+            {allProducts.length == 0 ? (
+              <Box
+                sx={{
+                  p: 2,
+                  m: 1,
+                  height: "250px",
+                  width: "100%",
+                  boxShadow: 1,
                 }}
               >
-                Checkout
-              </Button>
-            </CardActions>
-          </Card>
-        </Grid>
-      </Grid>
+                <Typography sx={{ fontSize: 16 }}>
+                  Not a product on your shopping cart.
+                </Typography>
+              </Box>
+            ) : (
+              allProducts.map((item, index) => (
+                <Box key={index} sx={{ p: 2, m: 1, width: "100%" }}>
+                  <ProductCardAtCart
+                    key={item.productId}
+                    name={item.name}
+                    price={item.price}
+                    description={item.description}
+                    image={item.image}
+                    productId={item.productId}
+                    onDelete={removeFromShoppingCart}
+                  />
+                </Box>
+              ))
+            )}
+          </Stack>
+        </Box>
+
+        {allProducts.length != 0 ? (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              boxShadow: 1,
+              width: "20%",
+              p: 2,
+              height: "70%",
+            }}
+          >
+            <Typography
+              sx={{ fontSize: 25, pb: 3, borderBottom: 1 }}
+              align="center"
+            >
+              Summary
+            </Typography>
+            <Typography
+              sx={{ fontSize: 16, mt: 3, whiteSpace: "pre" }}
+              variant="h5"
+            >
+              {"Subtotal:                                                 R$ " +
+                totalPrice(allProducts)}
+            </Typography>
+            <Typography
+              sx={{ fontSize: 16, mt: 3, whiteSpace: "pre" }}
+              variant="h5"
+            >
+              {
+                "Discounts:                                               R$ -100,00"
+              }
+            </Typography>
+            <Typography
+              sx={{ fontSize: 16, mt: 18, whiteSpace: "pre" }}
+              variant="h5"
+            >
+              {"Total:                                                     R$ " +
+                totalPrice(allProducts)}
+            </Typography>
+
+            <Button
+              sx={{ mt: 3 }}
+              variant="contained"
+              size="large"
+              onClick={() => {
+                navigate("/checkout");
+              }}
+            >
+              Checkout
+            </Button>
+          </Box>
+        ) : null}
+      </Box>
     </>
   );
 }

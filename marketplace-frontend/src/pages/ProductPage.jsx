@@ -73,6 +73,8 @@ function ProductPage() {
           price: data["price"],
           image: data["image"],
           rating: data["rating"],
+          sellerId: data["sellerId"],
+          sellerUsername: data["sellerUsername"],
         };
 
         const response2 = await fetch(
@@ -116,105 +118,186 @@ function ProductPage() {
     <>
       <PrimarySearchAppBar />
       <GroupsBar />
-      <Box sx={{ ml: 40, mt: 20, flexGrow: 1, boxShadow: 2, width: 1100 }}>
-        <Grid container spacing={10} sx={{ m: 4 }}>
-          <Grid>
-            <Box
-              component="img"
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "flex-start",
+          mt: 10,
+          mx: "auto",
+          width: "70%",
+          gap: 10,
+        }}
+      >
+        <Box
+          component="img"
+          sx={{
+            border: 1,
+            borderRadius: 5,
+            objectFit: "contain",
+            height: "100%",
+            width: 600,
+            mt: 3,
+          }}
+          alt="The house from the offer."
+          src={"http://localhost:8080" + product.image}
+        />
+
+        <Box
+          sx={{
+            display: "flex",
+            width: "40%",
+            flexDirection: "column",
+            mt: 2,
+          }}
+        >
+          <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+            {product.name}
+          </Typography>
+
+          <Box
+            sx={{
+              display: "flex",
+              alignContent: "row",
+              mt: 2,
+              gap: 2,
+              pb: 1,
+              borderBottom: 1,
+            }}
+          >
+            <Typography sx={{ fontSize: 13 }}>
+              {product.rating.toFixed(1) + " "}
+            </Typography>
+            <Rating
+              size="small"
+              name="half-rating-read"
               sx={{
-                border: 1,
-                objectFit: "contain",
-
-                height: 400,
-                width: 400,
+                "& .MuiRating-icon": {
+                  fontSize: 16, // smaller font size than default (~24)
+                },
               }}
-              alt="The house from the offer."
-              src={"http://localhost:8080" + product.image}
+              defaultValue={product.rating}
+              precision={0.5}
+              readOnly
             />
-          </Grid>
-          <Grid>
-            <Box>
-              <Typography variant="h3" sx={{}}>
-                {product.name}
-              </Typography>
-              <Stack sx={{ mt: 3 }}>
-                <Rating
-                  name="half-rating-read"
-                  defaultValue={product.rating}
-                  precision={0.5}
-                  readOnly
-                />
-              </Stack>
-              <Typography
-                fontWeight={"fontWeightBold"}
-                variant="h4"
-                sx={{ mt: 3 }}
-              >
-                R$ {product.price}
-              </Typography>
-              <Typography sx={{ mt: 5 }}>{product.description}</Typography>
+            <Typography sx={{ fontSize: 13 }}>{"(" + 221 + ")"}</Typography>
+          </Box>
+          <Box sx={{ mt: 5, pb: 4, borderBottom: 1 }}>
+            <Typography variant="h4">R$ {product.price}</Typography>
+          </Box>
 
-              <Typography sx={{ mt: 2 }}>Info 1</Typography>
-              <Typography sx={{ mt: 2 }}>Info 2</Typography>
-              <Typography sx={{ mt: 2 }}>Brand: </Typography>
-              <Typography sx={{ mt: 2 }}>Product Condition: </Typography>
-              <Button variant="contained" sx={{ mt: 7, mb: 5 }}>
-                Buy
-              </Button>
-              <Button
-                variant="outlined"
-                sx={{ ml: 5, mt: 7, mb: 5 }}
-                onClick={() => {
-                  onClickAddCart(productId);
-                  navigate("/", { state: { showAddToCartSnackBar: true } });
-                }}
-              >
-                Add to Cart
-              </Button>
-              <Button
-                variant="outlined"
-                sx={{ ml: 5, mt: 7, mb: 5 }}
-                onClick={() => {
-                  onClickAddCart(productId);
-                  navigate("/my-chats", {
-                    state: {
-                      createNewConversation: true,
-                      sellerId: 2,
-                      sellerName: "Joao",
-                      productId: productId,
-                      productName: product.name,
-                      productImage: product.image,
-                    },
-                  });
-                }}
-              >
-                Talk with the Seller
-              </Button>
-            </Box>
-          </Grid>
-        </Grid>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              mt: 2,
+            }}
+          >
+            <Typography sx={{ fontSize: 12 }}>Seller: </Typography>
+            <Button
+              variant="transparent"
+              sx={{
+                textTransform: "none",
+                fontSize: 12,
+                color: "blue",
+
+                pl: 1,
+                minWidth: "auto",
+              }}
+              onClick={() => {}}
+            >
+              {product.sellerUsername}
+            </Button>
+            <Button
+              variant="outlined"
+              sx={{ textTransform: "none", fontSize: 12, color: "blue" }}
+              onClick={() => {
+                navigate("/my-chats", {
+                  state: { showAddToCartSnackBar: true },
+                });
+              }}
+            >
+              Send a message to the seller
+            </Button>
+          </Box>
+
+          <Box
+            sx={{
+              fontSize: 20,
+              display: "flex",
+              flexDirection: "column",
+              mt: 35,
+              gap: 4,
+            }}
+          >
+            <Button variant="contained" sx={{ fontWeight: "bold" }}>
+              Buy Now !
+            </Button>
+            <Button
+              variant="outlined"
+              sx={{ fontWeight: "bold" }}
+              onClick={() => {
+                onClickAddCart(productId);
+                navigate("/", { state: { showAddToCartSnackBar: true } });
+              }}
+            >
+              Add to Cart
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              mt: 5,
+            }}
+          ></Box>
+        </Box>
       </Box>
-      <Box sx={{ borderRadius: 3, boxShadow: 1, ml: 40, width: 1100 }}>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          width: "70%",
+          borderRadius: 3,
+          mx: "auto",
+          boxShadow: 1,
+          mt: 3,
+          p: 2,
+        }}
+      >
         <Typography
           fontWeight={"fontWeightBold"}
           variant="h5"
-          sx={{ pt: 3, pl: 3 }}
+          sx={{ pl: 2, mt: 2 }}
         >
           Product Information:
         </Typography>
-        <Typography
-          sx={{ fontSize: 20, m: 2 }}
-          dangerouslySetInnerHTML={{ __html: product.longDescription }}
-        ></Typography>
+        <Typography sx={{ fontSize: 20, mt: 3 }}>
+          {product.longDescription}
+        </Typography>
       </Box>
-      <Box sx={{ borderRadius: 1, boxShadow: 1, ml: 40, width: 1100 }}>
-        <Typography variant="h5" sx={{ m: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          mx: "auto",
+          boxShadow: 1,
+          width: "70%",
+          mt: 3,
+        }}
+      >
+        <Typography
+          variant="h5"
+          sx={{ pl: 2, mt: 2, mb: 3, fontWeight: "bold" }}
+        >
           Product Reviews:
         </Typography>
 
-        <Stack sx={{ boxShadow: 2, p: 3 }}>
+        <Stack sx={{ boxShadow: 2 }}>
           {reviews.map((item) => (
-            <>
+            <Box sx={{ mt: 2, borderBottom: "0.5px solid grey" }}>
               <Box display="flex">
                 <IconButton size="large" color="inherit">
                   <AccountCircle />
@@ -231,7 +314,7 @@ function ProductPage() {
               <Typography sx={{ fontSize: 20, m: 2 }}>
                 {item.content}
               </Typography>
-            </>
+            </Box>
           ))}
         </Stack>
       </Box>

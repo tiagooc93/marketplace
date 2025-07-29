@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import PrimarySearchAppBar from "../components/AppBar";
 import Box from "@mui/material/Box";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import ProductCard from "../components/ProductCard";
 import GroupsBar from "../components/GroupsBar";
@@ -136,8 +135,15 @@ function SearchResultPage() {
         <PrimarySearchAppBar />
         <GroupsBar />
       </Box>
-      <Grid container spacing={0} sx={{ ml: 5 }}>
-        <Grid>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "flex-start",
+          mx: "auto",
+          width: "95%",
+        }}
+      >
+        <Box sx={{}}>
           <Card
             sx={{
               mt: 5,
@@ -219,8 +225,6 @@ function SearchResultPage() {
                   label={product.brand}
                 />
               ))}
-
-              <FormControlLabel control={<Checkbox />} label="Gibson" />
             </FormGroup>
             <Typography
               fontWeight="bold"
@@ -303,23 +307,28 @@ function SearchResultPage() {
               </Button>
             </Box>
           </Card>
-        </Grid>
-        <Grid>
-          <Grid container spacing={0} sx={{ m: 10 }}>
-            {filteredProducts.map((item, index) => (
-              <Box key={index} sx={{ p: 2, m: 1, maxWidth: 400 }}>
-                <ProductCard
-                  name={item.name}
-                  price={item.price}
-                  description={item.description}
-                  image={item.image}
-                  productId={item.productId}
-                />
-              </Box>
-            ))}
+        </Box>
+        <Box sx={{ mt: 10, ml: 5 }}>
+          <Typography variant="h5" sx={{}}>
+            Resultados para a pesquisa:
+          </Typography>
+          <Grid>
+            <Grid container spacing={3} sx={{ mt: 5 }}>
+              {filteredProducts.map((item, index) => (
+                <Box key={index} sx={{ maxWidth: 400 }}>
+                  <ProductCard
+                    name={item.name}
+                    price={item.price}
+                    description={item.description}
+                    image={item.image}
+                    productId={item.productId}
+                  />
+                </Box>
+              ))}
+            </Grid>
           </Grid>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </>
   );
 }

@@ -5,6 +5,7 @@ import Snackbar from "@mui/material/Snackbar";
 import { useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import GroupsBar from "./components/GroupsBar";
+import GroupsCircles from "./components/GroupsCircles";
 import PromotionalBanner from "./components/PromotionalBanner";
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
       </div>
 
       <Catalog title="10% Cashback on all Electronics below" />
-      <PromotionalBanner />
+      <GroupsCircles></GroupsCircles>
       <Catalog title="High salles rate on your region" />
       <Snackbar
         open={open}

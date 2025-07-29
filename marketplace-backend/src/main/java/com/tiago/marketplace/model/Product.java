@@ -44,6 +44,8 @@ public class Product {
 
     private Float rating =4.0F;
 
+    private String sellerUsername;
+
     public Product(String name, double price, String description, String image){
         this.name=name;
         this.price=price;
@@ -51,23 +53,16 @@ public class Product {
         this.image=image;
     }
 
-    public Product(String name, double price, String category, String description, String brand, String image, Long sellerId){
+    public Product(String name, double price, String category, String description, String longDescription, String brand, String image, Long sellerId, String sellerUsername){
         this.name=name;
         this.price=price;
         this.category=category;
         this.description=description;
-        this.brand = brand;
-        this.image=image;
-        this.sellerId = sellerId;
-    }
-
-    public Product(String name, double price, String description, String longDescription, String brand, String image){
-        this.name=name;
-        this.price=price;
-        this.description=description;
         this.longDescription=longDescription;
         this.brand = brand;
         this.image=image;
+        this.sellerId = sellerId;
+        this.sellerUsername = sellerUsername;
     }
 
 }
