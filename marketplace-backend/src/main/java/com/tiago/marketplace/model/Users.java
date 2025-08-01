@@ -9,6 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -26,11 +29,17 @@ public class Users {
 
     private String email;
 
-    private String adress;
+    private String password;
 
-    public Users(String name, String username){
+    private String address;
+
+    private List<Long> userAds = new ArrayList<>();
+
+    public Users(String name, String username, String email, String password){
         this.name = name;
         this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
 }

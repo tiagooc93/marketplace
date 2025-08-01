@@ -3,6 +3,7 @@ import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
+import { Menu, MenuItem } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
@@ -10,6 +11,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import Badge from "@mui/material/Badge";
+import { useAuth } from "../AuthContext";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -53,8 +58,44 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({ showShoppingCart = true }) {
   const navigate = useNavigate();
+
+  const { logout } = useAuth();
+  const { isAuthenticated } = useAuth();
+
+  const [shoppingCartNumberOfItems, setShoppingCartNumberOfItems] = useState(0);
+
+  useEffect(() => {
+    console.log("Getting number of items on Shopping Cart for the Badge");
+
+    const token = localStorage.getItem("token");
+    console.log("token: ", token);
+
+    const getShoppingCartNumberOfItens = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/shopping/size",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+        const size = data["size"];
+
+        console.log("Response for shopping cart number of items:", data);
+        setShoppingCartNumberOfItems(size);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getShoppingCartNumberOfItens();
+  }, []);
 
   function onShoppingCartClick() {
     navigate("/cart");
@@ -71,6 +112,17 @@ export default function PrimarySearchAppBar() {
       console.log("User pressed Enter with search:", searchString);
       navigate(`/search?query=${encodeURIComponent(searchString)}`);
     }
+  };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget); // open menu
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null); // close menu
   };
 
   return (
@@ -134,43 +186,121 @@ export default function PrimarySearchAppBar() {
                 Anounce
               </Typography>
             </Button>
-            <Button
-              onClick={() => {
-                navigate("/my-chats", {
-                  state: {
-                    createNewConversation: false,
-                  },
-                });
-              }}
-              sx={{
-                color: "black",
-                textTransform: "none",
-                backgroundColor: "transparent",
-              }}
-            >
-              <Typography
-                variant="h6"
-                align="center"
-                noWrap
-                sx={{
-                  pr: 5,
 
-                  display: { color: "black", xs: "none", sm: "block" },
+            {isAuthenticated ? (
+              <>
+                <Button
+                  onClick={(e) => {
+                    setAnchorEl(e.currentTarget);
+                  }}
+                  sx={{
+                    color: "black",
+                    textTransform: "none",
+                    backgroundColor: "transparent",
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    align="center"
+                    noWrap
+                    sx={{
+                      pr: 5,
+
+                      display: { color: "black", xs: "none", sm: "block" },
+                    }}
+                  >
+                    My Account
+                  </Typography>
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/my-ads");
+                    }}
+                  >
+                    My Products
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/my-chats", {
+                        state: { createNewConversation: false },
+                      });
+                    }}
+                  >
+                    My Chats
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      logout();
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <Button
+                onClick={() => {
+                  navigate("/my-chats", {
+                    state: {
+                      createNewConversation: false,
+                    },
+                  });
+                }}
+                sx={{
+                  color: "black",
+                  textTransform: "none",
+                  backgroundColor: "transparent",
                 }}
               >
-                My Account
-              </Typography>
-            </Button>
+                <Typography
+                  variant="h6"
+                  align="center"
+                  noWrap
+                  sx={{
+                    pr: 5,
 
-            <IconButton
-              sx={{ border: 2 }}
-              size="large"
-              edge="end"
-              onClick={onShoppingCartClick}
-              color="inherit"
-            >
-              <ShoppingCartIcon />
-            </IconButton>
+                    display: { color: "black", xs: "none", sm: "block" },
+                  }}
+                >
+                  Sign In
+                </Typography>
+              </Button>
+            )}
+
+            {showShoppingCart && (
+              <IconButton
+                sx={{ border: 1 }}
+                size="large"
+                edge="end"
+                onClick={onShoppingCartClick}
+                color="inherit"
+              >
+                <Badge
+                  badgeContent={shoppingCartNumberOfItems}
+                  sx={{
+                    "& .MuiBadge-badge": {
+                      fontSize: "15px",
+                      height: 30,
+                      minWidth: 30,
+                      padding: "0 px",
+                      borderRadius: "50%",
+                    },
+                  }}
+                  color="error"
+                >
+                  <ShoppingCartIcon sx={{ fontSize: 30 }} />
+                </Badge>
+              </IconButton>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

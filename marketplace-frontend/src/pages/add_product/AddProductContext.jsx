@@ -6,7 +6,7 @@ const AddProductContext = createContext();
 export const AddProductProvider = ({ children }) => {
   const [productData, setProductData] = useState({
     name: "",
-    Category: "",
+    category: "",
     description: "",
     longDescription: "",
     price: "",

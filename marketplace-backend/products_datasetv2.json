@@ -438,6 +438,226 @@
   "Category": "kitchen",
   "SellerID": 1,
   "SellerUsername": "tiagooc10"
-}
+},
+  {
+    "ID": 41,
+    "Product": "UrbanEdge Men's Classic Fit Denim Jacket",
+    "Description": "Durable and stylish denim jacket with a timeless cut and metal buttons.",
+    "LongDescription": "This classic fit denim jacket by UrbanEdge offers a rugged, timeless look with reinforced seams and metal buttons. Its durable denim fabric makes it a staple for layering in any season. Whether worn casually or as part of a streetwear outfit, this jacket delivers lasting comfort and style.",
+    "Brand": "UrbanEdge",
+    "Price": 79.99,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 42,
+    "Product": "ThreadSmith Women's Soft Knit Cardigan",
+    "Description": "Lightweight and cozy knit cardigan perfect for layering in cool weather.",
+    "LongDescription": "Wrap yourself in warmth with the ThreadSmith Soft Knit Cardigan. Designed for everyday comfort, it features a relaxed fit, ribbed cuffs and hem, and a breathable knit texture ideal for layering. Its soft-touch fabric ensures you'll stay cozy at home or out and about during cooler days.",
+    "Brand": "ThreadSmith",
+    "Price": 64.50,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 43,
+    "Product": "Nordvue Men's Slim Fit Chinos - Khaki",
+    "Description": "Modern slim fit chinos with stretch fabric for all-day comfort.",
+    "LongDescription": "The Nordvue Slim Fit Chinos are designed to move with you. Crafted from a soft stretch cotton blend, these versatile khaki pants pair effortlessly with any top—from tees to button-downs—making them perfect for work, weekends, or casual nights out.",
+    "Brand": "Nordvue",
+    "Price": 54.99,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 44,
+    "Product": "EvoWear Women's High-Rise Leggings - Black",
+    "Description": "Moisture-wicking high-rise leggings designed for active and casual wear.",
+    "LongDescription": "Designed to keep up with your lifestyle, the EvoWear High-Rise Leggings feature breathable, sweat-wicking fabric and a contouring fit. Perfect for the gym or lounging, they offer a flattering high-rise waistband that stays in place all day.",
+    "Brand": "EvoWear",
+    "Price": 39.99,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 45,
+    "Product": "Modistry Unisex Oversized Hoodie - Charcoal",
+    "Description": "Plush fleece hoodie with kangaroo pocket and adjustable drawstring.",
+    "LongDescription": "The Modistry Oversized Hoodie delivers cozy comfort with modern edge. Made with premium fleece fabric, it includes an oversized hood, ribbed cuffs, and a front kangaroo pocket. Great for layering or lounging, this hoodie keeps you warm and stylish.",
+    "Brand": "Modistry",
+    "Price": 59.95,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 46,
+    "Product": "UrbanEdge Men's Graphic Tee - Mountain Print",
+    "Description": "100% cotton tee with vibrant mountain landscape graphic.",
+    "LongDescription": "Bring adventure to your wardrobe with this UrbanEdge Graphic Tee. Made of ultra-soft cotton and featuring a scenic mountain print, this T-shirt pairs comfort with bold style. Ideal for layering or wearing solo during warmer days.",
+    "Brand": "UrbanEdge",
+    "Price": 24.99,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 47,
+    "Product": "ThreadSmith Women's Button-Up Shirt - Linen Blend",
+    "Description": "Breathable linen-blend shirt with a relaxed silhouette and rolled sleeves.",
+    "LongDescription": "The ThreadSmith Linen Blend Shirt offers effortless style and comfort. Its breathable fabric, casual button-up design, and rolled sleeves make it a perfect go-to for spring and summer. Pairs beautifully with jeans or skirts.",
+    "Brand": "ThreadSmith",
+    "Price": 44.00,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 48,
+    "Product": "Nordvue Men's Performance Polo - Navy",
+    "Description": "Moisture-wicking polo shirt with classic collar and athletic cut.",
+    "LongDescription": "Stay cool and comfortable with Nordvue's Performance Polo. Featuring moisture-wicking technology, a lightweight feel, and a tailored athletic fit, this polo transitions easily from work to weekend.",
+    "Brand": "Nordvue",
+    "Price": 35.00,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 49,
+    "Product": "EvoWear Women's Cropped Active Tank - Heather Gray",
+    "Description": "Breathable cropped tank with racerback design for workouts or layering.",
+    "LongDescription": "This EvoWear Active Tank features breathable fabric, a stylish cropped cut, and a racerback design for full mobility. Whether you're working out or layering it for a casual look, it provides comfort and performance.",
+    "Brand": "EvoWear",
+    "Price": 28.50,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 50,
+    "Product": "Modistry Men's Cargo Joggers - Olive",
+    "Description": "Stretch cargo joggers with tapered legs and zippered pockets.",
+    "LongDescription": "Modistry Cargo Joggers combine street style and utility with durable fabric, elastic waistband, and multiple zippered pockets. Perfect for casual days or active wear, these joggers bring functionality to fashion.",
+    "Brand": "Modistry",
+    "Price": 49.99,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 51,
+    "Product": "UrbanEdge Women's Distressed Skinny Jeans",
+    "Description": "Edgy skinny jeans with distressed details and faded wash.",
+    "LongDescription": "UrbanEdge Skinny Jeans feature a flattering fit and edgy distressed details. With added stretch for comfort and a faded vintage wash, they're your go-to for casual looks with attitude.",
+    "Brand": "UrbanEdge",
+    "Price": 68.99,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 52,
+    "Product": "ThreadSmith Men's Cotton Henley Shirt - Burgundy",
+    "Description": "Casual 3-button Henley crafted from ultra-soft combed cotton.",
+    "LongDescription": "Made for comfort and everyday wear, this ThreadSmith Henley Shirt offers a laid-back look with soft cotton fabric, a 3-button placket, and ribbed cuffs. Ideal for layering or wearing solo.",
+    "Brand": "ThreadSmith",
+    "Price": 31.75,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 53,
+    "Product": "Nordvue Women's Longline Puffer Vest - Cream",
+    "Description": "Lightweight puffer vest with snap closure and insulated lining.",
+    "LongDescription": "Stay warm without bulk in the Nordvue Longline Puffer Vest. With sleek quilted insulation and a stylish snap front, it's perfect for layering on chilly days while keeping your silhouette modern.",
+    "Brand": "Nordvue",
+    "Price": 89.95,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 54,
+    "Product": "EvoWear Men's Breathable Mesh Shorts - Black",
+    "Description": "Quick-drying mesh shorts with elastic waistband and deep pockets.",
+    "LongDescription": "EvoWear Mesh Shorts are built for performance and comfort. Made from breathable mesh with a flexible waistband and roomy pockets, they’re great for gym sessions, lounging, or warm-weather activities.",
+    "Brand": "EvoWear",
+    "Price": 29.99,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 55,
+    "Product": "Modistry Women's Ribbed Knit Dress - Plum",
+    "Description": "Stretchy ribbed dress with scoop neckline and midi length.",
+    "LongDescription": "The Modistry Knit Dress offers a body-hugging fit with soft ribbed texture and elegant scoop neckline. The plum color adds depth and versatility, perfect for day-to-night transitions.",
+    "Brand": "Modistry",
+    "Price": 72.00,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 56,
+    "Product": "UrbanEdge Men's Padded Flannel Shirt Jacket - Red Plaid",
+    "Description": "Warm flannel shirt jacket with quilted lining and snap buttons.",
+    "LongDescription": "Blending the best of a shirt and a jacket, this UrbanEdge flannel is padded for warmth with a quilted inner lining. Ideal for layering, it offers rustic charm with modern comfort and durability.",
+    "Brand": "UrbanEdge",
+    "Price": 84.99,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 57,
+    "Product": "ThreadSmith Women's V-Neck Tee - Sky Blue",
+    "Description": "Everyday essential tee with relaxed fit and breathable fabric.",
+    "LongDescription": "This V-Neck Tee from ThreadSmith is soft, breathable, and flattering. With a relaxed silhouette and subtle drape, it's a must-have staple for any wardrobe and pairs effortlessly with jeans or skirts.",
+    "Brand": "ThreadSmith",
+    "Price": 22.00,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 58,
+    "Product": "Nordvue Men's Wool Blend Overcoat - Charcoal",
+    "Description": "Elegant wool blend overcoat with structured collar and deep pockets.",
+    "LongDescription": "This Nordvue Overcoat combines classic tailoring with warmth and elegance. The wool-blend fabric, sharp lapels, and deep side pockets make it a winter essential for polished and professional outfits.",
+    "Brand": "Nordvue",
+    "Price": 129.99,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 59,
+    "Product": "EvoWear Women's Seamless Sports Bra - Lavender",
+    "Description": "Supportive seamless bra with removable pads and moisture control.",
+    "LongDescription": "EvoWear's Seamless Sports Bra is designed to provide all-day support and comfort. Featuring soft stretch fabric, removable padding, and breathable construction, it's ideal for light workouts or casual wear.",
+    "Brand": "EvoWear",
+    "Price": 34.99,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 60,
+    "Product": "Modistry Men's Relaxed Fit Lounge Pants - Navy",
+    "Description": "Soft jersey knit lounge pants with drawstring waist and tapered leg.",
+    "LongDescription": "Experience relaxation in the Modistry Lounge Pants. With ultra-soft jersey fabric, adjustable drawstring, and a modern tapered fit, these pants are ideal for unwinding at home or casual weekend wear.",
+    "Brand": "Modistry",
+    "Price": 42.50,
+    "Category": "clothing",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  }
 ]
 

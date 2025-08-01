@@ -26,13 +26,20 @@ function AddProductImages() {
 
       <Box display="flex" gap={120} justifyContent="center" sx={{ mt: 5 }}>
         <Button
-          sx={{ fontSize: 20 }}
+          sx={{ fontSize: 18, border: 1, borderRadius: 2, pl: 4, pr: 4 }}
           onClick={() => navigate("/add-product/details")}
         >
           Back
         </Button>
         <Button
-          sx={{ fontSize: 20 }}
+          sx={{
+            fontSize: 18,
+            border: 1,
+            borderRadius: 2,
+            pl: 4,
+            pr: 4,
+            visibility: productData.image == null ? "hidden" : "visible",
+          }}
           onClick={() => navigate("/add-product/price")}
         >
           Next
@@ -40,26 +47,25 @@ function AddProductImages() {
       </Box>
 
       <Box
-        display="flex"
-        justifyContent="center" //align horizontally
-        alignItems="center" //align vertically
-        minHeight="70vh"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "70vh",
+          gap: 10,
+        }}
       >
-        <Stack spacing={5} sx={{ width: "800px" }}>
-          <Typography variant="h3">Upload images of the product</Typography>
-          <Stack spacing={5} sx={{ width: "500px" }}>
-            <Button variant="outlined" component="label">
-              Upload Image
-              <input
-                type="file"
-                accept="image/*"
-                hidden
-                onChange={onImageUpload}
-              />
-            </Button>
-            <Button variant="contained">Upload</Button>
-          </Stack>
-        </Stack>
+        <Typography variant="h3">Upload images of the product</Typography>
+
+        <Button
+          variant="outlined"
+          component="label"
+          sx={{ fontSize: 15, border: 2, color: "blue" }}
+        >
+          Click here to Upload Image
+          <input type="file" accept="image/*" hidden onChange={onImageUpload} />
+        </Button>
       </Box>
     </>
   );

@@ -7,8 +7,12 @@ import lombok.Getter;
 @Data
 @AllArgsConstructor
 public class ChatMessageDTO {
+
     private String sender;
+
     private String content;
+
     private String timestamp;
+
     private String conversationId;
 }

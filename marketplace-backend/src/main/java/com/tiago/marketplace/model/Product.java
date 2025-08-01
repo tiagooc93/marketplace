@@ -42,7 +42,7 @@ public class Product {
     @Column(name="seller_id")
     private Long sellerId;
 
-    private Float rating =4.0F;
+    private Float rating = 4.0F;
 
     private String sellerUsername;
 

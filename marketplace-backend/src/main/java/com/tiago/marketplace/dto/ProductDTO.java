@@ -9,11 +9,17 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductDTO {
 
     private String name;
+
     private String category;
+
     private String description;
+
     private String longDescription;
-    private String price;  // You might want to use BigDecimal depending on your use case
+
+    private String price;
+
     private String condition;
+
     private MultipartFile image;
 
 }

@@ -7,7 +7,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["Book", "Electronic", "Music", "Kitchen", "Top Sellers", "Room"];
+const pages = ["Book", "Electronic", "Clothes", "Kitchen", "Used"];
 
 function GroupsBar() {
   const navigate = useNavigate();

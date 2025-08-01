@@ -1,4 +1,4 @@
 package com.tiago.marketplace.dto;
 
-public record AddToCartDTO(Long userId, Long productId) {
+public record AddToCartDTO(Long productId) {
 }

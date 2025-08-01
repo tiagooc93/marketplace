@@ -21,13 +21,11 @@ import java.util.List;
 public class ChatController {
 
     @Autowired
-    ChatService chatService;
+    private ChatService chatService;
 
 
     @PostMapping("/conversation")
     public ResponseEntity<Void> saveConversation(@RequestBody ChatConversationDTO chatConversationDTO){
-
-        System.out.println("RECEVI CONV: " + chatConversationDTO.toString());
 
         ChatConversation chatConversation = new ChatConversation(
                 chatConversationDTO.getUserId(),

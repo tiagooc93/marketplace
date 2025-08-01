@@ -32,9 +32,9 @@ function App() {
         <PromotionalBanner />
       </div>
 
-      <Catalog title="10% Cashback on all Electronics below" />
+      <Catalog title="The best Electronics: " />
       <GroupsCircles></GroupsCircles>
-      <Catalog title="High salles rate on your region" />
+      <Catalog title="Choose a new item for your kitchen" />
       <Snackbar
         open={open}
         autoHideDuration={3000}

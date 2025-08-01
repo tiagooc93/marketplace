@@ -1,6 +1,8 @@
 package com.tiago.marketplace.controller;
 
+import com.tiago.marketplace.dto.AddToCartDTO;
 import com.tiago.marketplace.dto.ProductDTO;
+import com.tiago.marketplace.dto.RemoveProductAdDTO;
 import com.tiago.marketplace.model.Product;
 import com.tiago.marketplace.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")
-@CrossOrigin
 public class ProductController {
 
     @Autowired
@@ -51,7 +52,15 @@ public class ProductController {
 
     @GetMapping("/{productId}")
     public ResponseEntity<Optional<Product>> getProduct(@PathVariable Long productId){
-        return productService.getProduct(productId);
+        return ResponseEntity.ok(productService.getProduct(productId));
+    }
+
+    @PostMapping("/remove")
+    public ResponseEntity<Void> removeProductAd(@RequestBody RemoveProductAdDTO removeProductAdDTO){
+        Long productId = removeProductAdDTO.productId();
+        productService.deleteProduct(productId);
+
+        return ResponseEntity.noContent().build();
     }
 
 }

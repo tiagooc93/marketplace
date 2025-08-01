@@ -8,6 +8,7 @@ import PrimarySearchAppBarSimple from "../../components/AppBarSimple";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import { useAddProductContext } from "./AddProductContext";
+import { IconButton } from "@mui/material";
 
 const categories = [
   "Books",
@@ -33,17 +34,25 @@ function AddProductCategory() {
 
   return (
     <>
-      <PrimarySearchAppBarSimple></PrimarySearchAppBarSimple>
+      <PrimarySearchAppBarSimple />
       <Toolbar></Toolbar>
       <Box display="flex" gap={120} justifyContent="center" sx={{ mt: 5 }}>
         <Button
-          sx={{ fontSize: 20 }}
+          sx={{ fontSize: 18, border: 1, borderRadius: 2, pl: 4, pr: 4 }}
           onClick={() => navigate("/add-product/name")}
         >
           Back
         </Button>
         <Button
-          sx={{ fontSize: 20 }}
+          sx={{
+            fontSize: 18,
+            border: 1,
+            borderRadius: 2,
+            pl: 4,
+            pr: 4,
+            visibility:
+              productData.category.trim() === "" ? "hidden" : "visible",
+          }}
           onClick={() => navigate("/add-product/details")}
         >
           Next
@@ -52,50 +61,46 @@ function AddProductCategory() {
 
       <Box
         display="flex"
+        flexDirection="column"
         justifyContent="center" //align horizontally
         alignItems="center" //align vertically
         minHeight="70vh"
+        gap={10}
       >
-        <Stack spacing={10} sx={{ width: "1000px" }}>
-          <Typography variant="h3">
-            What of the following categories your product belong ?
-          </Typography>
+        <Typography variant="h3">
+          What of the following categories your product belong ?
+        </Typography>
 
-          <Container maxWidth="xl">
-            <Toolbar disableGutters>
-              <Box
+        <Box display="flex" gap={5}>
+          {categories.map((page) => (
+            <Box
+              key={page}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <IconButton
                 sx={{
-                  flexGrow: 1,
-                  display: { xs: "flex", md: "none" },
+                  width: 150,
+                  height: 150,
+                  borderRadius: "50%",
+                  padding: 0,
+                  overflow: "hidden",
+                  boxShadow: 2,
+                  backgroundColor: "#fff", // optional
                 }}
-              ></Box>
-              <Box
-                sx={{
-                  flexGrow: 1,
-                  display: { xs: "none", md: "flex" },
-                }}
+                onClick={onCategoryClick}
               >
-                <Box display="flex" gap={2}>
-                  {categories.map((page) => (
-                    <Button
-                      key={page}
-                      sx={{
-                        p: 5,
-                        color: "black",
-                        display: "block",
-                        border: 1,
-                        borderRadius: 10,
-                      }}
-                      onClick={onCategoryClick}
-                    >
-                      <Typography sx={{ fontSize: 15 }}>{page}</Typography>
-                    </Button>
-                  ))}
-                </Box>
-              </Box>
-            </Toolbar>
-          </Container>
-        </Stack>
+                {page}
+              </IconButton>
+
+              <Typography sx={{ fontSize: 15 }}>{page}</Typography>
+            </Box>
+          ))}
+        </Box>
       </Box>
     </>
   );

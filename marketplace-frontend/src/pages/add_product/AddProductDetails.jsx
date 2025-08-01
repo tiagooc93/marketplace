@@ -34,13 +34,24 @@ function AddProductDetails() {
       <Toolbar></Toolbar>
       <Box display="flex" gap={120} justifyContent="center" sx={{ mt: 5 }}>
         <Button
-          sx={{ fontSize: 20 }}
+          sx={{ fontSize: 18, border: 1, borderRadius: 2, pl: 4, pr: 4 }}
           onClick={() => navigate("/add-product/category")}
         >
           Back
         </Button>
         <Button
-          sx={{ fontSize: 20 }}
+          sx={{
+            fontSize: 18,
+            border: 1,
+            borderRadius: 2,
+            pl: 4,
+            pr: 4,
+            visibility:
+              productData.description.trim() !== "" &&
+              productData.longDescription.trim() !== ""
+                ? "visible"
+                : "hidden",
+          }}
           onClick={() => navigate("/add-product/images")}
         >
           Next
@@ -60,6 +71,7 @@ function AddProductDetails() {
           <TextField
             id="outlined-basic1"
             label="Short Description"
+            value={productData.description}
             variant="outlined"
             onChange={handleShortDescriptionChange}
           />
@@ -67,6 +79,9 @@ function AddProductDetails() {
             id="outlined-basic1"
             label="Long Description"
             variant="outlined"
+            multiline
+            rows={15} // Sets the initial number of visible rows
+            value={productData.longDescription}
             onChange={handleLongDescriptionChange}
           />
         </Stack>

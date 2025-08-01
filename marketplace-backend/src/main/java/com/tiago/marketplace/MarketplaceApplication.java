@@ -2,6 +2,9 @@ package com.tiago.marketplace;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tiago.marketplace.controller.AuthenticationController;
+import com.tiago.marketplace.dto.LoginDTO;
+import com.tiago.marketplace.dto.RegisterDTO;
 import com.tiago.marketplace.model.Product;
 import com.tiago.marketplace.model.Review;
 import com.tiago.marketplace.model.Users;
@@ -31,6 +34,9 @@ public class MarketplaceApplication implements CommandLineRunner {
 	private UsersService usersService;
 
 	@Autowired
+	private AuthenticationController authenticationController;
+
+	@Autowired
 	private ProductRepository productRepository;
 
 	@Autowired
@@ -50,7 +56,7 @@ public class MarketplaceApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception{
-		usersService.addUser(new Users("tiago","tiagooc10"));
+		authenticationController.register(new RegisterDTO("tiago","tiago@test.com","12345"));
 
 		ObjectMapper mapper = new ObjectMapper();
 		// Absolute or relative path to the file

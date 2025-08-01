@@ -48,8 +48,8 @@ public class ShoppingCartService {
         shoppingCartRepository.save(shoppingCart);
     }
 
-
     public List<Product> getCurrentCart(Long userId){
+        System.out.println("ID DENTRO DO CART SERVICE:" + userId);
         ShoppingCart shoppingCart = shoppingCartRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 

@@ -8,6 +8,20 @@ import PrimarySearchAppBarSimple from "../../components/AppBarSimple";
 import Toolbar from "@mui/material/Toolbar";
 import { useAddProductContext } from "./AddProductContext";
 
+const validateNumber = (val) => {
+  if (val.trim() === "") {
+    return false;
+  }
+  if (isNaN(val)) {
+    return false;
+  }
+  const num = Number(val);
+  if (num < 0) {
+    return false;
+  }
+  return true;
+};
+
 function AddProductPrice() {
   const navigate = useNavigate();
 
@@ -28,13 +42,22 @@ function AddProductPrice() {
       <Toolbar></Toolbar>
       <Box display="flex" gap={120} justifyContent="center" sx={{ mt: 2 }}>
         <Button
-          sx={{ fontSize: 20 }}
+          sx={{ fontSize: 18, border: 1, borderRadius: 2, pl: 4, pr: 4 }}
           onClick={() => navigate("/add-product/images")}
         >
           Back
         </Button>
         <Button
-          sx={{ fontSize: 20 }}
+          sx={{
+            fontSize: 18,
+            border: 1,
+            borderRadius: 2,
+            pl: 4,
+            pr: 4,
+            visibility: validateNumber(productData.price.trim())
+              ? "visible"
+              : "hidden",
+          }}
           onClick={() => navigate("/add-product/condition")}
         >
           Next
@@ -53,6 +76,7 @@ function AddProductPrice() {
             id="outlined-basic1"
             label="Price"
             variant="outlined"
+            value={productData.price}
             onChange={handlePriceChange}
           />
         </Stack>

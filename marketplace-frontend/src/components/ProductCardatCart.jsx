@@ -26,51 +26,64 @@ export default function ProductCardAtCart({
   console.log("product: ", name, ": ", description);
 
   return (
-    <Card sx={{ height: 250, width: "100%" }}>
-      <Grid container spacing={17} sx={{ width: "100%" }}>
-        <Grid>
-          <Box sx={{ p: 2, m: 1, maxWidth: 300 }}>
-            <CardMedia
-              component="img"
-              height="200"
-              image={"http://localhost:8080" + image}
-              alt={name}
-              sx={{ objectFit: "contain" }}
-            />
-          </Box>
-        </Grid>
-        <Grid>
-          <Typography gutterBottom variant="h5" component="div" sx={{ mt: 3 }}>
-            Price:
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            sx={{ color: "text.secondary", mt: 3 }}
-          >
-            {price}
-          </Typography>
-        </Grid>
-        <Grid>
-          <Typography gutterBottom variant="h5" component="div" sx={{ mt: 3 }}>
-            Quantity:
-          </Typography>
-          <Typography variant="h5" sx={{ color: "text.secondary", mt: 3 }}>
-            1 unit
-          </Typography>
-        </Grid>
-        <Grid>
-          <IconButton
-            size="large"
-            onClick={() => onDelete(productId)}
-            aria-label="delete"
-            sx={{ mt: 7 }}
-          >
-            <DeleteIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
-    </Card>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        gap: 20,
+        height: "170px",
+        width: "900px",
+        boxShadow: 2,
+      }}
+    >
+      <Box
+        component="img"
+        src={"http://localhost:8080" + image}
+        alt={name}
+        sx={{
+          ml: 2,
+          height: "150px",
+          objectFit: "contain",
+          width: "150px",
+          borderRadius: 5,
+        }}
+      />
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Typography gutterBottom variant="h5" component="div" sx={{ mt: 3 }}>
+          Price:
+        </Typography>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          sx={{ color: "text.secondary", mt: 3 }}
+        >
+          {price}
+        </Typography>
+      </Box>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Typography gutterBottom variant="h5" component="div" sx={{ mt: 3 }}>
+          Quantity:
+        </Typography>
+        <Typography variant="h5" sx={{ color: "text.secondary", mt: 3 }}>
+          1 unit
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <IconButton
+          size="large"
+          onClick={() => onDelete(productId)}
+          aria-label="delete"
+        >
+          <DeleteIcon />
+        </IconButton>
+      </Box>
+    </Box>
   );
 }

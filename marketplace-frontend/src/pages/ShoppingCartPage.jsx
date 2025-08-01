@@ -2,14 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import ProductCardAtCart from "../components/ProductCardatCart";
-import Grid from "@mui/material/Grid";
 import PrimarySearchAppBar from "../components/AppBar";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import GroupsBar from "../components/GroupsBar";
 
@@ -26,10 +21,18 @@ function ShoppingCartPage() {
 
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token");
+
   const fetchAllProducts = async () => {
     try {
       console.log("Fetching data of products in current Shopping cart");
-      const response = await fetch("http://localhost:8080/api/shopping/list/1");
+      const response = await fetch("http://localhost:8080/api/shopping/list", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       //setar num state
       console.log("All data from cart fetched products:");
@@ -68,9 +71,9 @@ function ShoppingCartPage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            userId: 1,
             productId: productId,
           }),
         }
@@ -92,7 +95,7 @@ function ShoppingCartPage() {
   return (
     <>
       <Box>
-        <PrimarySearchAppBar />
+        <PrimarySearchAppBar showShoppingCart={false} />
         <GroupsBar />
         <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
           <Typography gutterBottom variant="h4" sx={{ fontWeight: "bold" }}>
@@ -111,7 +114,7 @@ function ShoppingCartPage() {
           justifyContent: "center",
         }}
       >
-        <Box sx={{ display: "flex", width: "50%" }}>
+        <Box sx={{ display: "flex", width: "50%", overflowY: "auto" }}>
           <Stack spacing={5} sx={{}}>
             {allProducts.length == 0 ? (
               <Box
@@ -119,8 +122,6 @@ function ShoppingCartPage() {
                   p: 2,
                   m: 1,
                   height: "250px",
-                  width: "100%",
-                  boxShadow: 1,
                 }}
               >
                 <Typography sx={{ fontSize: 16 }}>
@@ -128,18 +129,16 @@ function ShoppingCartPage() {
                 </Typography>
               </Box>
             ) : (
-              allProducts.map((item, index) => (
-                <Box key={index} sx={{ p: 2, m: 1, width: "100%" }}>
-                  <ProductCardAtCart
-                    key={item.productId}
-                    name={item.name}
-                    price={item.price}
-                    description={item.description}
-                    image={item.image}
-                    productId={item.productId}
-                    onDelete={removeFromShoppingCart}
-                  />
-                </Box>
+              allProducts.map((item) => (
+                <ProductCardAtCart
+                  key={item.productId}
+                  name={item.name}
+                  price={item.price}
+                  description={item.description}
+                  image={item.image}
+                  productId={item.productId}
+                  onDelete={removeFromShoppingCart}
+                />
               ))
             )}
           </Stack>
@@ -151,9 +150,9 @@ function ShoppingCartPage() {
               display: "flex",
               flexDirection: "column",
               boxShadow: 1,
-              width: "20%",
-              p: 2,
-              height: "70%",
+              width: "350px",
+              p: 4,
+              height: "400px",
             }}
           >
             <Typography
@@ -167,7 +166,7 @@ function ShoppingCartPage() {
               variant="h5"
             >
               {"Subtotal:                                                 R$ " +
-                totalPrice(allProducts)}
+                totalPrice(allProducts).toFixed(2)}
             </Typography>
             <Typography
               sx={{ fontSize: 16, mt: 3, whiteSpace: "pre" }}
@@ -182,7 +181,7 @@ function ShoppingCartPage() {
               variant="h5"
             >
               {"Total:                                                     R$ " +
-                totalPrice(allProducts)}
+                totalPrice(allProducts).toFixed(2)}
             </Typography>
 
             <Button

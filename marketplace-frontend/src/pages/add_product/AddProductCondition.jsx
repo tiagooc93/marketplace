@@ -61,12 +61,24 @@ function AddProductCondition() {
       <Toolbar></Toolbar>
       <Box display="flex" gap={120} justifyContent="center" sx={{ mt: 5 }}>
         <Button
-          sx={{ fontSize: 20 }}
+          sx={{ fontSize: 18, border: 1, borderRadius: 2, pl: 4, pr: 4 }}
           onClick={() => navigate("/add-product/price")}
         >
           Back
         </Button>
-        <Button sx={{ fontSize: 20 }} onClick={handleSubmit}>
+        <Button
+          sx={{
+            fontSize: 18,
+            border: 1,
+            borderRadius: 2,
+            pl: 4,
+            pr: 4,
+            border: 2,
+            visibility:
+              productData.condition.trim() === "" ? "hidden" : "visible",
+          }}
+          onClick={handleSubmit}
+        >
           Create Ad !
         </Button>
       </Box>
@@ -77,46 +89,44 @@ function AddProductCondition() {
         alignItems="center" //align vertically
         minHeight="70vh"
       >
-        <Stack spacing={10} sx={{ width: "1000px" }}>
-          <Typography variant="h3">
-            What is the condition of the product ?
-          </Typography>
+        <Typography variant="h3">
+          What is the condition of the product ?
+        </Typography>
 
-          <Container maxWidth="xl">
-            <Toolbar disableGutters>
-              <Box
-                sx={{
-                  flexGrow: 1,
-                  display: { xs: "flex", md: "none" },
-                }}
-              ></Box>
-              <Box
-                sx={{
-                  flexGrow: 1,
-                  display: { xs: "none", md: "flex" },
-                }}
-              >
-                <Box display="flex" gap={2}>
-                  {categories.map((page) => (
-                    <Button
-                      key={page}
-                      sx={{
-                        p: 5,
-                        color: "black",
-                        display: "block",
-                        border: 1,
-                        borderRadius: 10,
-                      }}
-                      onClick={onConditionClick}
-                    >
-                      <Typography sx={{ fontSize: 15 }}>{page}</Typography>
-                    </Button>
-                  ))}
-                </Box>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+              }}
+            ></Box>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+              }}
+            >
+              <Box display="flex" gap={2}>
+                {categories.map((page) => (
+                  <Button
+                    key={page}
+                    sx={{
+                      p: 5,
+                      color: "black",
+                      display: "block",
+                      border: 1,
+                      borderRadius: 10,
+                    }}
+                    onClick={onConditionClick}
+                  >
+                    <Typography sx={{ fontSize: 15 }}>{page}</Typography>
+                  </Button>
+                ))}
               </Box>
-            </Toolbar>
-          </Container>
-        </Stack>
+            </Box>
+          </Toolbar>
+        </Container>
       </Box>
     </>
   );

@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Grid from "@mui/material/Grid";
+import { TextField } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PrimarySearchAppBar from "../components/AppBar";
@@ -15,15 +16,18 @@ import ProductReview from "../components/ProductReview";
 function onClickAddCart(productId) {
   console.log("Produto a ser adicionado no Cart:" + productId);
 
+  const token = localStorage.getItem("token");
+  console.log("token:", token);
+
   const addToShoppingCart = async () => {
     try {
       const response = await fetch("http://localhost:8080/api/shopping/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          userId: 1,
           productId: productId,
         }),
       });
@@ -46,6 +50,8 @@ function ProductPage() {
   const location = useLocation();
 
   const [loading, setLoading] = useState(true);
+
+  const [quantity, setQuantity] = useState(1);
 
   const productId = location.state.productId;
   const [product, setProduct] = useState({});
@@ -221,13 +227,28 @@ function ProductPage() {
               Send a message to the seller
             </Button>
           </Box>
+          <Box sx={{ display: "flex", flexDirection: "column", mt: 5, gap: 2 }}>
+            <Typography>Condition: New </Typography>
+            <Typography>Select Size: G</Typography>
+
+            <TextField
+              type="number"
+              label="Quantity"
+              variant="outlined"
+              value={quantity}
+              onChange={(e) =>
+                setQuantity(Math.max(1, parseInt(e.target.value) || 1))
+              }
+              sx={{ min: 1, width: 100 }}
+            />
+          </Box>
 
           <Box
             sx={{
               fontSize: 20,
               display: "flex",
               flexDirection: "column",
-              mt: 35,
+              mt: 10,
               gap: 4,
             }}
           >

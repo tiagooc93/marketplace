@@ -2,8 +2,10 @@ package com.tiago.marketplace.service;
 
 import com.tiago.marketplace.model.Product;
 import com.tiago.marketplace.model.Review;
+import com.tiago.marketplace.model.Users;
 import com.tiago.marketplace.repository.ProductRepository;
 import com.tiago.marketplace.repository.ReviewRepository;
+import com.tiago.marketplace.repository.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,26 +21,53 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    UsersRepository usersRepository;
+
     ReviewService reviewService;
 
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
         if (productRepository.existsByNameAndSellerId(product.getName(), product.getSellerId())) {
             throw new IllegalArgumentException("Product with this name and seller already exists.");
         }
-        return ResponseEntity.ok(productRepository.save(product));
 
+        Product savedProduct = productRepository.save(product);
+
+        try {
+            Users user = usersRepository.findById(product.getSellerId())
+                    .orElseThrow(() -> new RuntimeException("Invalid seller ID: " + product.getSellerId()));
+            user.getUserAds().add(savedProduct.getId());
+            usersRepository.save(user);
+        } catch (Exception e) {
+            System.err.println("Error inserting product: " + product.getName());
+            e.printStackTrace();
+            throw e;
+        }
+
+        return ResponseEntity.ok(savedProduct);
     }
 
-    public void deleteProduct(Product product){
-         productRepository.delete(product);
+    public void deleteProduct(Long productId){
+        Product product = productRepository.findById(productId).orElseThrow();
+        Long userId = product.getSellerId();
+        Users user = usersRepository.findById(userId).orElseThrow();
+        user.getUserAds().remove(product.getId()); // Or remove(productId)
+        usersRepository.save(user);
+
+        if (productRepository.existsById(productId)) {
+            productRepository.deleteById(productId);
+        } else {
+            throw new RuntimeException("Product not found with ID: " + productId);
+        }
     }
 
     public ResponseEntity<List<Product>> listAllProducts(){
         return ResponseEntity.ok(productRepository.findAll());
     }
 
-    public ResponseEntity<Optional<Product>> getProduct(Long productId) {
-        return ResponseEntity.ok(productRepository.findById(productId));
+    public Optional<Product> getProduct(Long productId) {
+
+        return productRepository.findById(productId);
 
     }
 

@@ -25,15 +25,26 @@ function AddProductName() {
     <>
       <PrimarySearchAppBarSimple></PrimarySearchAppBarSimple>
       <Toolbar></Toolbar>
-      <Box display="flex" gap={120} justifyContent="center" sx={{ mt: 5 }}>
+      <Box display="flex" gap={120} justifyContent="center" sx={{ mt: 2 }}>
         <Button
-          sx={{ fontSize: 20 }}
-          onClick={() => alert("Anuncio cancelado, limpando dados")}
+          sx={{ fontSize: 18, border: 1, borderRadius: 2, pl: 4, pr: 4 }}
+          onClick={() => {
+            alert("Ad canceled, cleaning product data !");
+            navigate("/");
+          }}
         >
           Back
         </Button>
+
         <Button
-          sx={{ fontSize: 20 }}
+          sx={{
+            fontSize: 18,
+            border: 1,
+            borderRadius: 2,
+            pl: 4,
+            pr: 4,
+            visibility: productData.name.trim() === "" ? "hidden" : "visible",
+          }}
           onClick={() => navigate("/add-product/category")}
         >
           Next
@@ -41,22 +52,24 @@ function AddProductName() {
       </Box>
 
       <Box
-        display="flex"
-        justifyContent="center" //align horizontally
-        alignItems="center" //align vertically
-        minHeight="70vh"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center", //align horizontally
+          alignItems: "center", //align vertically
+          minHeight: "70vh",
+          gap: 10,
+        }}
       >
-        <Stack spacing={5} sx={{ width: "800px" }}>
-          <Typography variant="h3">
-            What is the name of your product ?
-          </Typography>
-          <TextField
-            id="outlined-basic1"
-            label="Name"
-            variant="outlined"
-            onChange={handleChange}
-          />
-        </Stack>
+        <Typography variant="h3">What is the name of your product ?</Typography>
+        <TextField
+          sx={{ width: "900px" }}
+          id="outlined-basic1"
+          label="Name"
+          value={productData.name}
+          variant="outlined"
+          onChange={handleChange}
+        />
       </Box>
     </>
   );
