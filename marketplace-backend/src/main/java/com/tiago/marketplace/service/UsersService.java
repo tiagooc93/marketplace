@@ -45,6 +45,11 @@ public class UsersService {
         return user.get().getUserAds();
     }
 
+    public String getUsernameFromId(Long userId){
+        Users user = usersRepository.findById(userId).orElseThrow();
+        return user.getUsername();
+    }
+
     public Long getUserIdFromAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();

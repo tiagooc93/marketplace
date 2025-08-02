@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import PrimarySearchAppBar from "./AppBar";
+import { useNavigate } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -25,6 +26,7 @@ export default function ProductCardAtCart({
   console.log("imageScr: " + image);
   console.log("product: ", name, ": ", description);
 
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -36,18 +38,28 @@ export default function ProductCardAtCart({
         boxShadow: 2,
       }}
     >
-      <Box
-        component="img"
-        src={"http://localhost:8080" + image}
-        alt={name}
-        sx={{
-          ml: 2,
-          height: "150px",
-          objectFit: "contain",
-          width: "150px",
-          borderRadius: 5,
+      <IconButton
+        onClick={() => {
+          navigate("/product", {
+            state: {
+              productId: productId,
+            },
+          });
         }}
-      />
+      >
+        <Box
+          component="img"
+          src={"http://localhost:8080" + image}
+          alt={name}
+          sx={{
+            ml: 2,
+            height: "150px",
+            objectFit: "contain",
+            width: "150px",
+            borderRadius: 5,
+          }}
+        />
+      </IconButton>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Typography gutterBottom variant="h5" component="div" sx={{ mt: 3 }}>
           Price:

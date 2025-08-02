@@ -1,19 +1,12 @@
 import Box from "@mui/material/Box";
-import banner1 from "../images/banner4.png";
-import banner2 from "../images/banner5.png";
-import { GlobalStyles } from "@mui/material";
-import { useState } from "react";
 
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { IconButton } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const banners = [banner1, banner2];
+const banners = ["/images/banner4.png", "/images/banner5.png"];
 
 function PromotionalBanner() {
   return (

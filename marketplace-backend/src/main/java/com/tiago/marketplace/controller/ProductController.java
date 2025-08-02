@@ -5,6 +5,7 @@ import com.tiago.marketplace.dto.ProductDTO;
 import com.tiago.marketplace.dto.RemoveProductAdDTO;
 import com.tiago.marketplace.model.Product;
 import com.tiago.marketplace.service.ProductService;
+import com.tiago.marketplace.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,18 +23,28 @@ import java.util.Optional;
 public class ProductController {
 
     @Autowired
+    UsersService usersService;
+
+    @Autowired
     ProductService productService;
 
     @PostMapping("/create")
     public ResponseEntity<Product> saveProduct(@ModelAttribute ProductDTO productDTO) throws IOException {
+        Long userId = usersService.getUserIdFromAuthentication();
+        String username = usersService.getUsernameFromId(userId);
+
         Product product = new Product();
         product.setName(productDTO.getName());
+        product.setCategory(productDTO.getCategory());
         product.setDescription(productDTO.getDescription());
+        product.setCondition(productDTO.getCondition());
         product.setLongDescription(productDTO.getLongDescription());
         product.setPrice(Double.parseDouble(productDTO.getPrice()));
+        product.setSellerId(userId);
+        product.setSellerUsername(username);
+
 
         MultipartFile image = productDTO.getImage();
-        // Example: Save image to disk
         if (image != null && !image.isEmpty()) {
             String filename = System.currentTimeMillis() + "_" + image.getOriginalFilename();
             Path directoryPath = Paths.get("uploads/images");

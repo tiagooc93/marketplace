@@ -67,6 +67,8 @@ export default function PrimarySearchAppBar({ showShoppingCart = true }) {
   const [shoppingCartNumberOfItems, setShoppingCartNumberOfItems] = useState(0);
 
   useEffect(() => {
+    if (!isAuthenticated) return;
+
     console.log("Getting number of items on Shopping Cart for the Badge");
 
     const token = localStorage.getItem("token");
@@ -183,7 +185,7 @@ export default function PrimarySearchAppBar({ showShoppingCart = true }) {
                   display: { color: "black", xs: "none", sm: "block" },
                 }}
               >
-                Anounce
+                Create Ad
               </Typography>
             </Button>
 

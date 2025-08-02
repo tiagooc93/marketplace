@@ -34,6 +34,8 @@ public class Product {
 
     private String image;
 
+    private String condition = "New";
+
     @ManyToOne
     @JoinColumn(name = "cart_id")
     @JsonIgnore

@@ -10,25 +10,18 @@ import Container from "@mui/material/Container";
 import { useAddProductContext } from "./AddProductContext";
 import { IconButton } from "@mui/material";
 
-const categories = [
-  "Books",
-  "Eletronics",
-  "Music",
-  "Kitchen",
-  "Top Sellers",
-  "Room",
+const categories = ["Books", "Eletronics", "Sports", "Kitchen", "Other"];
+
+const images = [
+  "/images/books.jpg",
+  "/images/electronics.jpg",
+  "/images/sports.jpg",
+  "/images/kitchen.jpg",
 ];
 
 function AddProductCategory() {
   const { productData, setProductData } = useAddProductContext();
   console.log("ProductData from context:", productData);
-
-  const onCategoryClick = (e) => {
-    setProductData((prev) => ({
-      ...prev,
-      category: e.target.innerText,
-    }));
-  };
 
   const navigate = useNavigate();
 
@@ -72,7 +65,7 @@ function AddProductCategory() {
         </Typography>
 
         <Box display="flex" gap={5}>
-          {categories.map((page) => (
+          {categories.map((page, index) => (
             <Box
               key={page}
               sx={{
@@ -84,17 +77,30 @@ function AddProductCategory() {
             >
               <IconButton
                 sx={{
-                  width: 150,
-                  height: 150,
+                  width: 180,
+                  height: 180,
                   borderRadius: "50%",
                   padding: 0,
                   overflow: "hidden",
                   boxShadow: 2,
                   backgroundColor: "#fff", // optional
                 }}
-                onClick={onCategoryClick}
+                onClick={() => {
+                  setProductData((prev) => ({
+                    ...prev,
+                    category: page,
+                  }));
+                }}
               >
-                {page}
+                <img
+                  src={images[index]}
+                  alt="icon"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
               </IconButton>
 
               <Typography sx={{ fontSize: 15 }}>{page}</Typography>

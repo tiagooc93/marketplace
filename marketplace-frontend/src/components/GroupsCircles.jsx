@@ -9,13 +9,13 @@ import { useNavigate } from "react-router-dom";
 import BlenderIcon from "@mui/icons-material/Blender";
 import { IconButton } from "@mui/material";
 
-const pages = ["Books", "Kitchen", "Electronics", "Clothes"];
+const pages = ["Kitchen", "Electronics", "Sports", "Clothes"];
 
 const images = [
-  "src/images/books.jpg",
-  "src/images/kitchen.jpg",
-  "src/images/electronics.jpg",
-  "src/images/clothes.jpg",
+  "/images/kitchen.jpg",
+  "/images/electronics.jpg",
+  "/images/sports.jpg",
+  "/images/clothes.jpg",
 ];
 
 function GroupsCircles() {

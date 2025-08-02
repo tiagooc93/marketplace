@@ -13,7 +13,6 @@ function App() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    console.log("aqui: ", location.state);
     if (location.state?.showAddToCartSnackBar) {
       setOpen(true);
     }
@@ -32,14 +31,22 @@ function App() {
         <PromotionalBanner />
       </div>
 
-      <Catalog title="The best Electronics: " />
+      <Catalog
+        title="The Best Electronics for you: "
+        limit={10}
+        category="electronic"
+      />
       <GroupsCircles></GroupsCircles>
-      <Catalog title="Choose a new item for your kitchen" />
+      <Catalog
+        title="Choose your new sports item: "
+        limit={10}
+        category="sport"
+      />
       <Snackbar
         open={open}
         autoHideDuration={3000}
         onClose={handleClose}
-        message="Produto adicionado ao carrinho !"
+        message="Product added to your Cart !"
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       />
     </>

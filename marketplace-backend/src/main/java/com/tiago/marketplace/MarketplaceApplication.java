@@ -60,7 +60,7 @@ public class MarketplaceApplication implements CommandLineRunner {
 
 		ObjectMapper mapper = new ObjectMapper();
 		// Absolute or relative path to the file
-		File jsonFile = Paths.get("products_datasetv2.json").toFile();
+		File jsonFile = Paths.get("products_dataset.json").toFile();
 
 
 		List<Map<String, Object>> products = mapper.readValue(jsonFile, new TypeReference<>() {});

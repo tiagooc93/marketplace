@@ -12,9 +12,12 @@ import { useEffect, useState } from "react";
 import PrimarySearchAppBar from "../components/AppBar";
 import GroupsBar from "../components/GroupsBar";
 import ProductReview from "../components/ProductReview";
+import { AuthProvider, useAuth } from "../AuthContext";
+
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 function onClickAddCart(productId) {
-  console.log("Produto a ser adicionado no Cart:" + productId);
+  console.log("Product to be added to Cart:" + productId);
 
   const token = localStorage.getItem("token");
   console.log("token:", token);
@@ -36,7 +39,7 @@ function onClickAddCart(productId) {
 
       //const data = await response.json();
       //setar num state
-      console.log("Resposta apos adicao de produtor ao Shopping Cart:");
+      console.log("Response after adding product to Shopping Cart:");
       //console.log(data);
     } catch (error) {
       console.log(error);
@@ -53,11 +56,21 @@ function ProductPage() {
 
   const [quantity, setQuantity] = useState(1);
 
+  const { isAuthenticated } = useAuth();
+
   const productId = location.state.productId;
   const [product, setProduct] = useState({});
   const [reviews, setReviews] = useState([]);
 
   const navigate = useNavigate();
+
+  const [size, setSize] = useState("");
+
+  const handleSizeChange = (event, newSize) => {
+    if (newSize !== null) {
+      setSize(newSize);
+    }
+  };
 
   useEffect(() => {
     console.log("Retrieving data of product: " + productId);
@@ -76,8 +89,10 @@ function ProductPage() {
           name: data["name"],
           description: data["description"],
           longDescription: data["longDescription"],
+          category: data["category"],
           price: data["price"],
           image: data["image"],
+          condition: data["condition"],
           rating: data["rating"],
           sellerId: data["sellerId"],
           sellerUsername: data["sellerUsername"],
@@ -227,9 +242,38 @@ function ProductPage() {
               Send a message to the seller
             </Button>
           </Box>
-          <Box sx={{ display: "flex", flexDirection: "column", mt: 5, gap: 2 }}>
-            <Typography>Condition: New </Typography>
-            <Typography>Select Size: G</Typography>
+          <Box sx={{ display: "flex", flexDirection: "column", mt: 3, gap: 3 }}>
+            <Typography sx={{ fontSize: 13 }}>
+              Condition: {product.condition}
+            </Typography>
+            {product.category === "cloth" && (
+              <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+                <ToggleButtonGroup
+                  value={size}
+                  exclusive
+                  onChange={handleSizeChange}
+                  aria-label="clothing size"
+                  color="primary"
+                  sx={{ fontSize: 13 }}
+                >
+                  <ToggleButton value="XS" aria-label="extra small">
+                    XS
+                  </ToggleButton>
+                  <ToggleButton value="S" aria-label="small">
+                    S
+                  </ToggleButton>
+                  <ToggleButton value="M" aria-label="medium">
+                    M
+                  </ToggleButton>
+                  <ToggleButton value="L" aria-label="large">
+                    L
+                  </ToggleButton>
+                  <ToggleButton value="XL" aria-label="extra large">
+                    XL
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              </Box>
+            )}
 
             <TextField
               type="number"
@@ -239,7 +283,7 @@ function ProductPage() {
               onChange={(e) =>
                 setQuantity(Math.max(1, parseInt(e.target.value) || 1))
               }
-              sx={{ min: 1, width: 100 }}
+              sx={{ min: 1, width: 100, fontSize: 13 }}
             />
           </Box>
 
@@ -252,15 +296,30 @@ function ProductPage() {
               gap: 4,
             }}
           >
-            <Button variant="contained" sx={{ fontWeight: "bold" }}>
+            <Button
+              onClick={() => {
+                if (isAuthenticated) {
+                  onClickAddCart(productId);
+                  navigate("/cart");
+                } else {
+                  navigate("/login");
+                }
+              }}
+              variant="contained"
+              sx={{ fontWeight: "bold" }}
+            >
               Buy Now !
             </Button>
             <Button
               variant="outlined"
               sx={{ fontWeight: "bold" }}
               onClick={() => {
-                onClickAddCart(productId);
-                navigate("/", { state: { showAddToCartSnackBar: true } });
+                if (isAuthenticated) {
+                  onClickAddCart(productId);
+                  navigate("/", { state: { showAddToCartSnackBar: true } });
+                } else {
+                  navigate("/login");
+                }
               }}
             >
               Add to Cart

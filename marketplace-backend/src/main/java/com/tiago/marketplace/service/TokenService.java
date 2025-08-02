@@ -14,8 +14,10 @@ import java.time.ZoneOffset;
 
 @Service
 public class TokenService {
+
     @Value("${SECURITY.TOKEN}")
     private String secret;
+
     public String generateToken(Users user){
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);

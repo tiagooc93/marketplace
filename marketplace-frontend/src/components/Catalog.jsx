@@ -5,10 +5,12 @@ import Typography from "@mui/material/Typography";
 
 import { useEffect, useState } from "react";
 
-export default function Catalog({ title }) {
+export default function Catalog({ title, limit = 100, category = "" }) {
   const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
+    if (category === "") return;
+
     const fetchAllProducts = async () => {
       try {
         const response = await fetch("http://localhost:8080/api/product/list");
@@ -26,12 +28,24 @@ export default function Catalog({ title }) {
             price: data[i]["price"],
             image: data[i]["image"],
             productId: data[i]["id"],
+            category: data[i]["category"],
           });
         }
 
+        let filteredData = [];
+
+        console.log("category: ", category);
+
+        if (category !== "") {
+          filteredData = retrievedProducts.filter(
+            (item) => item.category === category
+          );
+        }
+        filteredData = filteredData.slice(0, limit);
+
         console.log("Data to be render:");
-        console.log(retrievedProducts);
-        setAllProducts(retrievedProducts);
+        console.log(filteredData);
+        setAllProducts(filteredData);
       } catch (error) {
         console.log(error);
       }

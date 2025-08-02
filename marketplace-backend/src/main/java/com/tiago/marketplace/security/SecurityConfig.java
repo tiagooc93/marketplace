@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Allow all OPTIONS preflight requests
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/product/**").permitAll()
@@ -45,6 +46,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/shopping/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/shopping/**").permitAll()
                         .requestMatchers("/uploads/images/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
@@ -64,7 +66,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173")); // frontend origin
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:5173", "http://host.docker.internal:3000"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true); // if using cookies or Authorization header

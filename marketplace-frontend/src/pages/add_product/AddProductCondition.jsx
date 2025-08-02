@@ -17,6 +17,8 @@ function AddProductCondition() {
 
   const { productData, setProductData } = useAddProductContext();
 
+  const token = localStorage.getItem("token");
+
   const onConditionClick = (e) => {
     setProductData((prev) => ({
       ...prev,
@@ -39,6 +41,9 @@ function AddProductCondition() {
       const response = await fetch("http://localhost:8080/api/product/create", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (response.ok) {
@@ -69,7 +74,6 @@ function AddProductCondition() {
         <Button
           sx={{
             fontSize: 18,
-            border: 1,
             borderRadius: 2,
             pl: 4,
             pr: 4,
