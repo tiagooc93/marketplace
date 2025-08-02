@@ -205,24 +205,24 @@ function SearchResultPage() {
             </Typography>
 
             <FormGroup sx={{ pb: 4, borderBottom: 1 }}>
-              {allProducts.map((product) => (
+              {[...new Set(allProducts.map((p) => p.brand))].map((brand) => (
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={selectedBrands.has(product.brand)}
+                      checked={selectedBrands.has(brand)}
                       onChange={(e) => {
                         let newSelectedBrands = new Set(selectedBrands);
 
                         if (e.target.checked) {
-                          newSelectedBrands.add(product.brand);
+                          newSelectedBrands.add(brand);
                         } else {
-                          newSelectedBrands.delete(product.brand);
+                          newSelectedBrands.delete(brand);
                         }
                         setSelectedBrands(newSelectedBrands);
                       }}
                     />
                   }
-                  label={product.brand}
+                  label={brand}
                 />
               ))}
             </FormGroup>

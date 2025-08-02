@@ -878,6 +878,50 @@
     "Category": "sport",
     "SellerID": 1,
     "SellerUsername": "tiagooc10"
+  },
+    {
+    "ID": 100,
+    "Product": "EchoNova Wireless Headphones - ANC, Over-Ear, 40H Battery",
+    "Description": "Premium over-ear wireless headphones with 40-hour battery life and active noise cancelling.",
+    "LongDescription": "Take your listening to the next level with EchoNova Wireless Headphones. Featuring adaptive active noise cancelling (ANC), deep bass response, and ultra-clear treble, these headphones are ideal for audiophiles and everyday users alike. Designed with memory foam ear cushions and an ergonomic headband, they offer lasting comfort through extended use. With 40 hours of battery life and USB-C fast charging, you can enjoy uninterrupted music or calls wherever you go. EchoNova’s Bluetooth 5.1 ensures a seamless connection with smartphones, tablets, and laptops. Built-in smart controls and voice assistant compatibility make operation effortless. Foldable and lightweight, they’re perfect for on-the-go lifestyles.",
+    "Brand": "EchoNova",
+    "Price": 109.99,
+    "Category": "electronic",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 101,
+    "Product": "Auralux StudioPro Headphones - Wired, Over-Ear, Hi-Res Audio",
+    "Description": "Studio-quality wired headphones delivering high-resolution sound for professionals.",
+    "LongDescription": "Engineered for precision, the Auralux StudioPro Headphones are perfect for producers, musicians, and serious listeners. These wired over-ear headphones deliver studio-grade audio with accurate sound reproduction and rich detail across the spectrum. With 50mm neodymium drivers and a wide frequency response range, you'll hear every nuance. The rugged build and adjustable headband ensure durability and comfort. Ideal for mixing, mastering, or immersive home listening, the StudioPro comes with a 1/4” adapter and detachable cable for flexibility in use.",
+    "Brand": "Auralux",
+    "Price": 89.00,
+    "Category": "electronic",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 102,
+    "Product": "NeonBeat Flex ANC Headphones - Foldable, Wireless, 28H Battery",
+    "Description": "Lightweight wireless headphones with ANC, foldable design, and 28-hour battery.",
+    "LongDescription": "Designed for portability and power, the NeonBeat Flex headphones offer an unbeatable combination of style and function. With Active Noise Cancelling and powerful 40mm drivers, you’ll experience immersive audio whether on a plane or at the gym. The lightweight, foldable design makes them travel-ready, while the soft-touch ear cups provide lasting comfort. Enjoy up to 28 hours of wireless playback with USB-C quick charge. NeonBeat Flex supports multipoint Bluetooth pairing and includes on-ear controls for effortless navigation.",
+    "Brand": "NeonBeat",
+    "Price": 84.50,
+    "Category": "electronic",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
+  },
+  {
+    "ID": 103,
+    "Product": "SonicWave AeroLite Wireless Headphones - Lightweight, On-Ear, 26H Battery",
+    "Description": "Compact wireless headphones with 26-hour battery life and crystal-clear audio.",
+    "LongDescription": "The SonicWave AeroLite Wireless Headphones deliver exceptional audio performance in a lightweight, travel-friendly design. Engineered for portability, these on-ear headphones feature 40mm dynamic drivers that provide balanced sound with clear highs and deep bass. Enjoy up to 26 hours of playback on a single charge, with fast USB-C charging to get you back to your music quickly. The slim, foldable frame makes it easy to carry in your bag or backpack, while the cushioned ear cups and adjustable headband ensure all-day comfort. With Bluetooth 5.0, a built-in mic, and on-ear controls, the AeroLite is perfect for commuting, casual listening, or remote work. Another innovation by SonicWave — trusted for quality wireless audio.",
+    "Brand": "SonicWave",
+    "Price": 79.99,
+    "Category": "electronic",
+    "SellerID": 1,
+    "SellerUsername": "tiagooc10"
   }
 ]
 
