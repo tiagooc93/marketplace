@@ -1,0 +1,75 @@
+services:
+  backend:
+    build:
+      context: ./marketplace-backend
+    container_name: market-place-backend
+    ports:
+      - "8080:8080"
+    environment:
+      # PostgreSQL
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+
+      # JWT
+      SECURITY_KEY: ${SECURITY_KEY}
+
+      # RabbitMQ
+      RABBITMQ_HOST: ${RABBITMQ_HOST}
+      RABBITMQ_PORT: ${RABBITMQ_PORT}
+      RABBITMQ_USER: ${RABBITMQ_USER}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+
+    volumes:
+      - ./marketplace-backend/uploads/images:/app/uploads/images
+      - ./marketplace-backend/products_dataset.json:/app/products_dataset.json
+      - ./marketplace-backend/reviews_dataset.json:/app/reviews_dataset.json
+    depends_on:
+      - db
+      - rabbitmq
+    networks:
+      - my-network
+
+  frontend:
+    build:
+      context: ./marketplace-frontend
+    container_name: marketplace-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - my-network
+      
+  db:
+    image: postgres:15
+    container_name: marketplace-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_evolution_data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5673:5672"     # backend uses this
+      - "15673:15672"   # management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    networks:
+      - my-network
+
+volumes:
+  postgres_evolution_data:
+
+networks:
+  my-network:
+    driver: bridge
