@@ -17,6 +17,8 @@ function totalPrice(products) {
 function Checkout() {
   const [order, setOrder] = useState({});
 
+  const token = localStorage.getItem("token");
+
   const onClickFinishOrder = async () => {
     console.log("Sending order: ", order);
     try {
@@ -24,6 +26,7 @@ function Checkout() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(order),
       });
@@ -43,7 +46,12 @@ function Checkout() {
   const fetchCartAndSetOrder = async () => {
     try {
       console.log("Fetching data of products in current Shopping cart");
-      const response = await fetch("http://localhost:8080/api/shopping/list/1");
+      const response = await fetch("http://localhost:8080/api/shopping/list", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       //setar num state
       console.log("All data from cart fetched products:");
@@ -86,18 +94,53 @@ function Checkout() {
       <GroupsBar />
       <Box display="flex" gap={20} sx={{ mt: 15, ml: 20 }}>
         <Box sx={{ width: 800, height: 500, boxShadow: 1 }}>
-          <Typography variant="h5" sx={{ ml: 20, mt: 4 }}>
+          <Typography variant="h5" sx={{ fontSize: 20, ml: 4, mt: 4 }}>
             Adress
           </Typography>
-          <Typography variant="h5" sx={{ ml: 20, mt: 4 }}>
+          <Typography variant="h5" sx={{ fontSize: 20, ml: 4, mt: 4 }}>
             Payment Method
           </Typography>
         </Box>
-        <Box sx={{ width: 600, height: 500, boxShadow: 1 }}>
-          <Typography variant="h5" sx={{}}>
-            Resumo
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            boxShadow: 1,
+            width: "350px",
+            p: 4,
+            height: "400px",
+          }}
+        >
+          <Typography
+            sx={{ fontSize: 25, pb: 3, borderBottom: 1 }}
+            align="center"
+          >
+            Summary
           </Typography>
-          <Button onClick={onClickFinishOrder}>Buy</Button>
+          <Typography
+            sx={{ fontSize: 16, mt: 3, whiteSpace: "pre" }}
+            variant="h5"
+          >
+            {"Subtotal:                                                 R$ " +
+              order.value}
+          </Typography>
+          <Typography
+            sx={{ fontSize: 16, mt: 25, whiteSpace: "pre" }}
+            variant="h5"
+          >
+            {"Total:                                                     R$ " +
+              order.value}
+          </Typography>
+
+          <Button
+            onClick={onClickFinishOrder}
+            sx={{ mt: 4 }}
+            variant="contained"
+            size="large"
+          >
+            Finish and Buy !
+          </Button>
         </Box>
       </Box>
     </>

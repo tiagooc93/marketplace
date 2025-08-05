@@ -18,7 +18,6 @@ function onClickAddCart(productId) {
   console.log("Product to be added to Cart:" + productId);
 
   const token = localStorage.getItem("token");
-  console.log("token:", token);
 
   const addToShoppingCart = async () => {
     try {
