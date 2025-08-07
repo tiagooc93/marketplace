@@ -77,7 +77,7 @@ function ProductPage() {
     console.log("NEW CONVERSATION DATA: ", newConversationData);
     try {
       const response = await fetch(
-        "http://localhost:8080/api/chat/conversation",
+        "http://localhost:8081/api/chat/conversation",
         {
           method: "POST",
           headers: {

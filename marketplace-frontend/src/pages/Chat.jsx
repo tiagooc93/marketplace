@@ -59,7 +59,7 @@ function Chat() {
     const fetchAllConversations = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/api/chat/conversation",
+          "http://localhost:8081/api/chat/conversation",
           {
             method: "GET",
             headers: {
@@ -105,7 +105,7 @@ function Chat() {
     const fetchAllMessages = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/api/chat/" + conversationId,
+          "http://localhost:8081/api/chat/" + conversationId,
           {
             method: "GET",
             headers: {
@@ -142,7 +142,7 @@ function Chat() {
 
   useEffect(() => {
     if (conversationId !== "") {
-      const socket = new SockJS("http://localhost:8080/ws/chat");
+      const socket = new SockJS("http://localhost:8081/ws/chat");
       const client = new Client({
         webSocketFactory: () => socket,
         connectHeaders: {

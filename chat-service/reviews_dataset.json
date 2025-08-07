@@ -1,0 +1,21 @@
+[
+  {
+    "ProductID": 1,
+    "Username": "joao123",
+    "Rating": 4.5,
+    "Content": "Excelent product, i love it !"
+  },
+  {
+    "ProductID": 1,
+    "Username": "marcos123",
+    "Rating": 5,
+    "Content": "Great !!"
+  },
+  {
+    "ProductID": 1,
+    "Username": "leo123",
+    "Rating": 3,
+    "Content": "Excelent !!"
+  }
+]
+
