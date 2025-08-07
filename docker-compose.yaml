@@ -2,7 +2,7 @@ services:
   backend:
     build:
       context: ./marketplace-backend
-    container_name: market-place-backend
+    container_name: marketplace-backend
     ports:
       - "8080:8080"
     environment:
@@ -30,6 +30,26 @@ services:
     networks:
       - my-network
 
+  chat-service:
+    build:
+      context: ./chat-service
+    container_name: chat-service
+    ports:
+      - "8081:8081"
+    environment:
+      # PostgreSQL (chat service)
+      SPRING_DATASOURCE_URL: ${CHAT_DB_URL}
+      SPRING_DATASOURCE_USERNAME: ${CHAT_DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${CHAT_DB_PASS}
+
+      # JWT or security
+      SECURITY_KEY: ${SECURITY_KEY}
+
+    depends_on:
+      - chat-db
+    networks:
+      - my-network
+
   frontend:
     build:
       context: ./marketplace-frontend
@@ -38,9 +58,10 @@ services:
       - "3000:80"
     depends_on:
       - backend
+      - chat-service
     networks:
       - my-network
-      
+
   db:
     image: postgres:15
     container_name: marketplace-db
@@ -52,6 +73,20 @@ services:
       - "5433:5432"
     volumes:
       - postgres_evolution_data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+  chat-db:
+    image: postgres:15
+    container_name: chat-db
+    environment:
+      POSTGRES_DB: ${CHAT_DB}
+      POSTGRES_USER: ${CHAT_DB_USER}
+      POSTGRES_PASSWORD: ${CHAT_DB_PASS}
+    ports:
+      - "5434:5432"
+    volumes:
+      - chat_postgres_data:/var/lib/postgresql/data
     networks:
       - my-network
 
@@ -69,6 +104,7 @@ services:
 
 volumes:
   postgres_evolution_data:
+  chat_postgres_data:
 
 networks:
   my-network:
