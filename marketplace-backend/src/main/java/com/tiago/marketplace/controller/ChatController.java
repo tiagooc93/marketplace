@@ -8,12 +8,7 @@ import com.tiago.marketplace.service.ChatService;
 import com.tiago.marketplace.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +27,7 @@ public class ChatController {
     @PostMapping("/conversation")
     public ResponseEntity<Map<String, String>> saveConversation(@RequestBody ChatConversationDTO chatConversationDTO){
         Long senderId = usersService.getUserIdFromAuthentication();
-        String username = usersService.getUsernameFromId(senderId);
+        String username = usersService.getUsernameFromAuthentication();
 
         String chatConversationId = "user" + senderId +
                 "-user" + chatConversationDTO.getReceiverId() +
@@ -52,7 +47,6 @@ public class ChatController {
         return ResponseEntity.ok(Map.of("message", "Conversation created successfully"));
     }
 
-    
     @GetMapping("/{conversationId}")
     public List<ChatMessageDTO> getMessages(@PathVariable String conversationId){
 

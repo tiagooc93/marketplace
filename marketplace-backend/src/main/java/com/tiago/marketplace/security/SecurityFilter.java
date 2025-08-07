@@ -1,6 +1,7 @@
 package com.tiago.marketplace.security;
 
 
+import com.tiago.marketplace.dto.AuthUserDTO;
 import com.tiago.marketplace.model.Users;
 import com.tiago.marketplace.repository.UsersRepository;
 import com.tiago.marketplace.service.TokenService;
@@ -32,8 +33,17 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if(login != null){
             Users user = usersRepository.findByEmail(login).orElseThrow(() -> new RuntimeException("User Not Found"));
+
+            // Decode the token to get the id and email
+            var decodedJWT = tokenService.decodeToken(token);
+            Long userId = decodedJWT.getClaim("userId").asLong();
+            String username = decodedJWT.getClaim("username").asString();
+            String email = decodedJWT.getSubject();
+            AuthUserDTO principal = new AuthUserDTO(userId, email,username);
+
             var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
+            //var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
+            var authentication = new UsernamePasswordAuthenticationToken(principal, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);

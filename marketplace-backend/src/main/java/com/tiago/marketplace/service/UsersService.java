@@ -1,5 +1,6 @@
 package com.tiago.marketplace.service;
 
+import com.tiago.marketplace.dto.AuthUserDTO;
 import com.tiago.marketplace.model.ShoppingCart;
 import com.tiago.marketplace.model.Users;
 import com.tiago.marketplace.repository.ShoppingCartRepository;
@@ -54,20 +55,22 @@ public class UsersService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
 
-        if (principal instanceof Users) {
-            return ((Users) principal).getId();
-        } else if (principal instanceof UserDetails) {
-            String email = ((UserDetails) principal).getUsername();
-            Users user = usersRepository.findByEmail(email)
-                    .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
-            return user.getId();
-        } else if (principal instanceof String) {
-            String email = (String) principal;
-            Users user = usersRepository.findByEmail(email)
-                    .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
-            return user.getId();
+        if (principal instanceof AuthUserDTO) {
+            return ((AuthUserDTO) principal).userId();
         }
 
         throw new RuntimeException("Unexpected principal type: " + principal.getClass());
     }
+
+    public String getUsernameFromAuthentication() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof AuthUserDTO authUser) {
+            return authUser.username();
+        }
+
+        throw new RuntimeException("Unexpected principal type: " + principal.getClass());
+    }
+
 }
