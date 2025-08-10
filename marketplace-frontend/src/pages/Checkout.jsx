@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 
 import Button from "@mui/material/Button";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function totalPrice(products) {
   let sum = 0.0;
@@ -20,6 +21,8 @@ function Checkout() {
   const [userEmail, setUserEmail] = useState();
 
   const token = localStorage.getItem("token");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("Effect that fetches user data: ");
@@ -63,6 +66,7 @@ function Checkout() {
       if (response.ok) {
         const message = await response.text();
         alert("Payment initiated: " + message);
+        navigate("/");
       } else {
         alert("Payment failed");
       }
