@@ -4,6 +4,9 @@ import com.tiago.marketplace.model.Product;
 import com.tiago.marketplace.model.ShoppingCart;
 import com.tiago.marketplace.repository.ProductRepository;
 import com.tiago.marketplace.repository.ShoppingCartRepository;
+import com.tiago.shared.dto.ClearCartMessageDTO;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +22,7 @@ public class ShoppingCartService {
     ShoppingCartRepository shoppingCartRepository;
 
 
-
     public void addProductToCart(Long productId, Long userId){
-
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
@@ -35,7 +36,6 @@ public class ShoppingCartService {
     }
 
     public void removeProductFromCart(Long productId, Long userId){
-
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
@@ -55,9 +55,23 @@ public class ShoppingCartService {
         return shoppingCart.getProducts();
     }
 
+    public void clearCart(Long userId){
+        ShoppingCart shoppingCart = shoppingCartRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
 
-    public void clearCart(){
+        for (Product product : shoppingCart.getProducts()) {
+            product.setShoppingCart(null);
+        }
+        shoppingCart.getProducts().clear();
 
+        shoppingCartRepository.save(shoppingCart);
+    }
+
+    @Transactional
+    @RabbitListener(queues = "clear-cart")
+    public void processPayment(ClearCartMessageDTO clearCartMessage) {
+        System.out.println("Clearing cart for user: " + clearCartMessage);
+        clearCart(clearCartMessage.getShoppingCartId());
     }
 
     public void finishOperation(){

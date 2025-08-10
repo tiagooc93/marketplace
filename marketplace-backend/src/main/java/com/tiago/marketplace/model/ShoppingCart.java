@@ -22,9 +22,8 @@ public class ShoppingCart {
 
     private Long userId;
 
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL )
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
-
 
     public ShoppingCart(Long userId){
         this.userId = userId;

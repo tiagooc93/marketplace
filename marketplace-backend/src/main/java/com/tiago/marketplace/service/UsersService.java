@@ -30,7 +30,6 @@ public class UsersService {
         Long userId = user.getId();
 
         ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.setUserId(userId);
         shoppingCartRepository.save(shoppingCart);
 
         return user;
