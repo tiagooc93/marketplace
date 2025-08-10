@@ -3,6 +3,7 @@ package com.tiago.marketplace.service;
 import com.tiago.marketplace.model.Review;
 import com.tiago.marketplace.repository.ProductRepository;
 import com.tiago.marketplace.repository.ReviewRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ReviewService {
 
     @Autowired
@@ -19,6 +21,7 @@ public class ReviewService {
     ProductService productService;
 
     public void saveReview(Review review){
+        log.info("Saving review: {}", review.toString());
         if (reviewRepository.existsByProductIdAndUsername(review.getProductId(), review.getUsername())) {
             throw new IllegalArgumentException("User of this username already inserted a review.");
         }
@@ -27,6 +30,7 @@ public class ReviewService {
     }
 
     public List<Review> getReviews(Long productId){
+        log.info("Fetching reviews of product, product id: {}", productId);
         return reviewRepository.findByProductId(productId);
     }
 

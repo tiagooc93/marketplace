@@ -7,6 +7,7 @@ import com.tiago.marketplace.repository.ProductRepository;
 import com.tiago.marketplace.repository.ReviewRepository;
 import com.tiago.marketplace.repository.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ProductService {
 
     @Autowired
@@ -27,27 +29,25 @@ public class ProductService {
     ReviewService reviewService;
 
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
+        log.info("Creating product: {}", product.toString());
+
         if (productRepository.existsByNameAndSellerId(product.getName(), product.getSellerId())) {
             throw new IllegalArgumentException("Product with this name and seller already exists.");
         }
-
         Product savedProduct = productRepository.save(product);
 
-        try {
-            Users user = usersRepository.findById(product.getSellerId())
-                    .orElseThrow(() -> new RuntimeException("Invalid seller ID: " + product.getSellerId()));
-            user.getUserAds().add(savedProduct.getId());
-            usersRepository.save(user);
-        } catch (Exception e) {
-            System.err.println("Error inserting product: " + product.getName());
-            e.printStackTrace();
-            throw e;
-        }
+        Users user = usersRepository.findById(product.getSellerId())
+                .orElseThrow(() -> new RuntimeException("Invalid seller ID: " + product.getSellerId()));
+
+        user.getUserAds().add(savedProduct.getId());
+        usersRepository.save(user);
 
         return ResponseEntity.ok(savedProduct);
     }
 
     public void deleteProduct(Long productId){
+        log.info("Deleting product of Id: {}", productId);
+
         Product product = productRepository.findById(productId).orElseThrow();
         Long userId = product.getSellerId();
         Users user = usersRepository.findById(userId).orElseThrow();
@@ -62,14 +62,17 @@ public class ProductService {
     }
 
     public ResponseEntity<List<Product>> listAllProducts(){
+        log.info("Listing all products: ");
         return ResponseEntity.ok(productRepository.findAll());
     }
-    public Optional<Product> getProduct(Long productId) {
 
+    public Optional<Product> getProduct(Long productId) {
+        log.info("Fetching product info, id: " + productId);
         return productRepository.findById(productId);
     }
 
     public void updateRating(Long productId){
+        log.info("Updating product rating, product id: {}", productId);
         List<Review> listOfReviews = reviewService.getReviews(productId);
 
         Float total = 0.0F;
@@ -78,7 +81,6 @@ public class ProductService {
         }
 
         Float rating = total / listOfReviews.size();
-
         Product product = productRepository.findById(productId)
                         .orElseThrow(() -> new EntityNotFoundException("Product not found when updating Rating"));
 

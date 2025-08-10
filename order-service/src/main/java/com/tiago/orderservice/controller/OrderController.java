@@ -5,6 +5,7 @@ import com.tiago.orderservice.dto.OrderDTO;
 import com.tiago.orderservice.model.Orders;
 import com.tiago.orderservice.service.OrderService;
 import com.tiago.shared.dto.OrderQueueMessageDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/order")
+@Slf4j
 public class OrderController {
 
     @Autowired
@@ -21,7 +23,8 @@ public class OrderController {
 
     @PostMapping("/checkout")
     public ResponseEntity<String> checkout(@RequestBody OrderDTO orderData) {
-        System.out.println("Received order:" + orderData.toString());
+        log.info("POST /api/oder, Received order: {}", orderData.toString());
+
         OrderQueueMessageDTO orderMessage = new OrderQueueMessageDTO();
         orderMessage.setValue(orderData.getValue());
         orderMessage.setUserEmail(orderData.getUserEmail());

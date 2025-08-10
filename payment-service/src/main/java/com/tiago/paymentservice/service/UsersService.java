@@ -1,14 +1,18 @@
 package com.tiago.paymentservice.service;
 
 import com.tiago.paymentservice.dto.AuthUserDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class UsersService {
 
     public Long getUserIdFromAuthentication() {
+        log.info("Getting user id from auth context");
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
 
@@ -20,6 +24,8 @@ public class UsersService {
     }
 
     public String getUsernameFromAuthentication() {
+        log.info("Getting username from auth context");
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
 

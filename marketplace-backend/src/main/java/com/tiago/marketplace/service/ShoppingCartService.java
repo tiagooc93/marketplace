@@ -5,6 +5,7 @@ import com.tiago.marketplace.model.ShoppingCart;
 import com.tiago.marketplace.repository.ProductRepository;
 import com.tiago.marketplace.repository.ShoppingCartRepository;
 import com.tiago.shared.dto.ClearCartMessageDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ShoppingCartService {
 
     @Autowired
@@ -21,8 +23,9 @@ public class ShoppingCartService {
     @Autowired
     ShoppingCartRepository shoppingCartRepository;
 
-
     public void addProductToCart(Long productId, Long userId){
+        log.info("Adding product to cart, product id: {} user/cart id: {}", productId, userId);
+
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
@@ -36,6 +39,8 @@ public class ShoppingCartService {
     }
 
     public void removeProductFromCart(Long productId, Long userId){
+        log.info("Removing product from cart, product id: {} user/cart id: {}", productId, userId);
+
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
@@ -49,6 +54,8 @@ public class ShoppingCartService {
     }
 
     public List<Product> getCurrentCart(Long userId){
+        log.info("Listing current cart, user/cart id: {}", userId);
+
         ShoppingCart shoppingCart = shoppingCartRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
@@ -56,6 +63,8 @@ public class ShoppingCartService {
     }
 
     public void clearCart(Long userId){
+        log.info("Clearing cart, user/cart id: {}", userId);
+
         ShoppingCart shoppingCart = shoppingCartRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
@@ -69,8 +78,9 @@ public class ShoppingCartService {
 
     @Transactional
     @RabbitListener(queues = "clear-cart")
-    public void processPayment(ClearCartMessageDTO clearCartMessage) {
-        System.out.println("Clearing cart for user: " + clearCartMessage);
+    public void clearCartListener(ClearCartMessageDTO clearCartMessage) {
+        log.info("Receive message on queue clear-cart: {}", clearCartMessage.toString());
+
         clearCart(clearCartMessage.getShoppingCartId());
     }
 

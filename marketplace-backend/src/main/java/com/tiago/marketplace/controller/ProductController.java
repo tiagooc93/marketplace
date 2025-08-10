@@ -6,6 +6,7 @@ import com.tiago.marketplace.dto.RemoveProductAdDTO;
 import com.tiago.marketplace.model.Product;
 import com.tiago.marketplace.service.ProductService;
 import com.tiago.marketplace.service.UsersService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")
+@Slf4j
 public class ProductController {
 
     @Autowired
@@ -30,6 +32,7 @@ public class ProductController {
 
     @PostMapping("/create")
     public ResponseEntity<Product> saveProduct(@ModelAttribute ProductDTO productDTO) throws IOException {
+        log.info("POST /api/product/create");
         Long userId = usersService.getUserIdFromAuthentication();
         String username = usersService.getUsernameFromId(userId);
 
@@ -58,16 +61,19 @@ public class ProductController {
 
     @GetMapping("/list")
     public ResponseEntity<List<Product>> listProducts(){
+        log.info("GET /api/product/list");
         return productService.listAllProducts();
     }
 
     @GetMapping("/{productId}")
     public ResponseEntity<Optional<Product>> getProduct(@PathVariable Long productId){
+        log.info("GET /api/product/");
         return ResponseEntity.ok(productService.getProduct(productId));
     }
 
     @PostMapping("/remove")
     public ResponseEntity<Void> removeProductAd(@RequestBody RemoveProductAdDTO removeProductAdDTO){
+        log.info("POST /api/product/remove");
         Long productId = removeProductAdDTO.productId();
         productService.deleteProduct(productId);
 
