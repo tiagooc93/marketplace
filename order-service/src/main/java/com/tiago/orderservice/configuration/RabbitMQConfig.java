@@ -19,6 +19,11 @@ public class RabbitMQConfig {
     }
 
     @Bean
+    public Queue clearCartQueue() {
+        return new Queue("clear-cart", true);
+    }
+
+    @Bean
     public Jackson2JsonMessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();
     }

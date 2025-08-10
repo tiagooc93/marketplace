@@ -2,6 +2,7 @@ package com.tiago.orderservice.service;
 
 import com.tiago.orderservice.model.Orders;
 import com.tiago.orderservice.repository.OrderRepository;
+import com.tiago.shared.dto.ClearCartMessageDTO;
 import com.tiago.shared.dto.OrderQueueMessageDTO;
 import com.tiago.shared.dto.PaymentStatusDTO;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -51,5 +52,9 @@ public class OrderService {
         orderRepository.save(order);
 
         System.out.println("Order " + order.getId() + " status updated to " + paymentStatus.getStatus());
+
+        ClearCartMessageDTO clearCartMessage = new ClearCartMessageDTO();
+        clearCartMessage.setShoppingCartId(paymentStatus.getShoppingCartId());
+        amqpTemplate.convertAndSend("clear-cart", clearCartMessage);
     }
 }
