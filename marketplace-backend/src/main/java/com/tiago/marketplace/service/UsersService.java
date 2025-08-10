@@ -73,4 +73,15 @@ public class UsersService {
         throw new RuntimeException("Unexpected principal type: " + principal.getClass());
     }
 
+    public String getEmailFromAuthentication() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof AuthUserDTO authUser) {
+            return authUser.email();
+        }
+
+        throw new RuntimeException("Unexpected principal type: " + principal.getClass());
+    }
+
 }

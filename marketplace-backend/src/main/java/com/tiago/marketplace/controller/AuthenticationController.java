@@ -60,7 +60,8 @@ public class AuthenticationController {
     @GetMapping("/me")
     public ResponseEntity<UserDTO> getCurrentUser() {
         Long userId = userService.getUserIdFromAuthentication();
-        UserDTO userDto = new UserDTO(userId);
+        String email = userService.getEmailFromAuthentication();
+        UserDTO userDto = new UserDTO(userId,email);
 
         return ResponseEntity.ok(userDto);
     }

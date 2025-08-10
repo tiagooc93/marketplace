@@ -1,4 +1,4 @@
 package com.tiago.marketplace.dto;
 
-public record UserDTO(Long id) {
+public record UserDTO(Long id, String email) {
 }
