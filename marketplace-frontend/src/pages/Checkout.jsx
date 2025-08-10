@@ -15,14 +15,43 @@ function totalPrice(products) {
 }
 
 function Checkout() {
-  const [order, setOrder] = useState({});
+  const [orderValue, setOrderValue] = useState();
+  const [userId, setUserId] = useState();
+  const [userEmail, setUserEmail] = useState();
 
   const token = localStorage.getItem("token");
 
+  useEffect(() => {
+    console.log("Effect that fetches user data: ");
+    const fetchCurrentUser = async () => {
+      const response = await fetch("http://localhost:8080/auth/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        const userData = await response.json();
+        console.log("Response after fetching user data: ", userData);
+        setUserId(userData.id);
+        setUserEmail(userData.email);
+      } else {
+        // handle error
+      }
+    };
+
+    fetchCurrentUser();
+  }, []);
+
   const onClickFinishOrder = async () => {
+    let order = {
+      value: orderValue,
+      shoppingCartId: userId,
+      userEmail: userEmail,
+    };
+
     console.log("Sending order: ", order);
     try {
-      const response = await fetch("http://localhost:8080/api/checkout", {
+      const response = await fetch("http://localhost:8082/api/order/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,12 +99,7 @@ function Checkout() {
       }
 
       let value = totalPrice(retrievedProducts);
-      let orderData = {
-        value: value,
-        shoppingCartId: 1,
-        userEmail: 1,
-      };
-      setOrder(orderData);
+      setOrderValue(value);
 
       console.log("Data to be render:");
       console.log(retrievedProducts);
@@ -123,14 +147,14 @@ function Checkout() {
             variant="h5"
           >
             {"Subtotal:                                                 R$ " +
-              order.value}
+              orderValue}
           </Typography>
           <Typography
             sx={{ fontSize: 16, mt: 25, whiteSpace: "pre" }}
             variant="h5"
           >
             {"Total:                                                     R$ " +
-              order.value}
+              orderValue}
           </Typography>
 
           <Button
