@@ -3,31 +3,27 @@ package com.tiago.marketplace;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tiago.marketplace.controller.AuthenticationController;
-import com.tiago.marketplace.dto.LoginDTO;
 import com.tiago.marketplace.dto.RegisterDTO;
 import com.tiago.marketplace.model.Product;
 import com.tiago.marketplace.model.Review;
-import com.tiago.marketplace.model.Users;
 import com.tiago.marketplace.repository.ProductRepository;
 import com.tiago.marketplace.repository.ReviewRepository;
-import com.tiago.marketplace.repository.UsersRepository;
 import com.tiago.marketplace.service.ProductService;
 import com.tiago.marketplace.service.ReviewService;
 import com.tiago.marketplace.service.UsersService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.io.File;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
 @SpringBootApplication
+@Slf4j
 public class MarketplaceApplication implements CommandLineRunner {
 
 	@Autowired
@@ -63,7 +59,6 @@ public class MarketplaceApplication implements CommandLineRunner {
 		// Absolute or relative path to the file
 		File jsonFile = Paths.get("products_dataset.json").toFile();
 
-
 		List<Map<String, Object>> products = mapper.readValue(jsonFile, new TypeReference<>() {});
 		for (Map<String, Object> raw : products) {
 			try {
@@ -81,12 +76,13 @@ public class MarketplaceApplication implements CommandLineRunner {
 						)
 				);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Skipping duplicate product: " + raw.get("Product") + " (SellerID: " + raw.get("SellerID") + ")");
+                log.info("Skipping duplicate product: {} (SellerID: {})", raw.get("Product"), raw.get("SellerID"));
+
 			} catch (Exception e) {
-				System.out.println("Error inserting product: " + raw.get("Product"));
+                log.info("Error inserting product: {}", raw.get("Product"));
 			}
 		}
-		System.out.println("Products seeded.");
+		log.info("Products seeded.");
 
 		//Seed Reviews
 		jsonFile = Paths.get("reviews_dataset.json").toFile();
@@ -102,12 +98,12 @@ public class MarketplaceApplication implements CommandLineRunner {
 						)
 				);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Skipping duplicate review: " + raw.get("ProductID") + " (Username: " + raw.get("Username") + ")");
+                log.info("Skipping duplicate review: {} (Username: {})", raw.get("ProductID"), raw.get("Username"));
 			} catch (Exception e) {
-				System.out.println("Error inserting review: " + raw.get("Content"));
+                log.info("Error inserting review: {}", raw.get("Content"));
 			}
 		}
-		System.out.println("Reviews seeded.");
+		log.info("Reviews seeded.");
 	}
 
 }
