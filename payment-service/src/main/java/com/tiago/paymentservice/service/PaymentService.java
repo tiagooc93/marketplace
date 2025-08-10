@@ -31,7 +31,7 @@ public class PaymentService {
 
         // Simulate payment
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -39,6 +39,7 @@ public class PaymentService {
         PaymentStatusDTO status = new PaymentStatusDTO();
         status.setOrderId(orderMessage.getOrderId());
         status.setStatus("APPROVED");
+        status.setShoppingCartId(orderMessage.getShoppingCartId());
         rabbitTemplate.convertAndSend("payment-status", status);
         System.out.println("Payment processed for order id: " + orderMessage.getOrderId());
     }
