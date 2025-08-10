@@ -9,4 +9,6 @@ public class PaymentStatusDTO {
 
     String status;
 
+    Long shoppingCartId;
+
 }
