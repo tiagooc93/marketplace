@@ -21,6 +21,13 @@ The second one demonstrates the product search feature with its available filter
 - RabbitMQ
 - PostgreSQL
 - Docker
+- Redis
+
+## System Design
+
+This diagram illustrates the current system architecture. I am in the process of migrating the backend to a microservices-based structure. So far, the system includes dedicated microservices for chat, payment, and order management.
+
+![Architecture Diagram](my_app.png)
 
 
 ## Features Implemented
