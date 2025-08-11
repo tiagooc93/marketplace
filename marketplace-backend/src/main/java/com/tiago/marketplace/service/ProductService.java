@@ -9,6 +9,7 @@ import com.tiago.marketplace.repository.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,8 +67,9 @@ public class ProductService {
         return ResponseEntity.ok(productRepository.findAll());
     }
 
+    @Cacheable(value = "products", key = "#productId")
     public Optional<Product> getProduct(Long productId) {
-        log.info("Fetching product info, id: " + productId);
+        log.info("Fetching product info, id: {}", productId);
         return productRepository.findById(productId);
     }
 
