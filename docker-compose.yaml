@@ -1,7 +1,8 @@
 services:
   backend:
     build:
-      context: ./marketplace-backend
+      context: .
+      dockerfile: marketplace-backend/Dockerfile
     container_name: marketplace-backend
     ports:
       - "8080:8080"
@@ -12,8 +13,8 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
 
       # Redis
-      SPRING_REDIS_HOST: ${SPRING_REDIS_HOST}
-      SPRING_REDIS_PORT: ${SPRING_REDIS_PORT}
+      SPRING_DATA_REDIS_HOST: ${SPRING_DATA_REDIS_HOST}
+      SPRING_DATA_REDIS_PORT: ${SPRING_DATA_REDIS_PORT}
 
       # JWT
       SECURITY_KEY: ${SECURITY_KEY}
