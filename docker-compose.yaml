@@ -11,6 +11,10 @@ services:
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
 
+      # Redis
+      SPRING_REDIS_HOST: ${SPRING_REDIS_HOST}
+      SPRING_REDIS_PORT: ${SPRING_REDIS_PORT}
+
       # JWT
       SECURITY_KEY: ${SECURITY_KEY}
 
@@ -27,6 +31,7 @@ services:
     depends_on:
       - db
       - rabbitmq
+      - redis
     networks:
       - my-network
 
@@ -181,6 +186,12 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    networks:
+      - my-network
+
+  redis:
+    image: redis:7
+    container_name: redis
     networks:
       - my-network
 
